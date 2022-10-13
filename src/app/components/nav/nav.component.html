@@ -1,0 +1,78 @@
+
+<mat-drawer-container class="container" autosize>
+
+    <!--Lado expandível do menu-->
+    <mat-drawer #drawer class="sidenav" mode="side">
+  
+      <!--Início da Listagem do Menu-->
+      <img src="assets/imagens/alho.png" alt="Imagem de navegação">
+      <mat-nav-list class="nav-list">
+  
+        <a mat-list-item routerLink="home">
+          <i class="material-icons">home</i>
+          Home
+  
+        </a>
+        <br />
+        <br />
+  
+        <a mat-list-item routerLink="usuarios">
+          <i class="material-icons">account_circle</i>
+          Usuários
+        </a>
+  
+        <a mat-list-item routerLink="clientes">
+          <i class="material-icons">person</i>
+          Clientes
+        </a>
+  
+        <a mat-list-item routerLink="dashboard">
+          <i class="material-icons">folder_shared</i>
+          Fornecedores
+        </a>
+  
+        <a mat-list-item routerLink="dashboard">
+          <i class="material-icons">person</i>
+          Vendedores
+        </a>
+  
+        <a mat-list-item routerLink="dashboard">
+          <i class="material-icons">important_devices</i>
+          Produtos
+        </a>
+  
+        <a mat-list-item routerLink="pedidos">
+          <i class="material-icons">credit_card</i>
+          Pedidos
+        </a>
+  
+        <a mat-list-item routerLink="dashboard">
+          <i class="material-icons">print</i>
+          Relatórios
+        </a>
+  
+        <br />
+        <br />
+  
+        <a mat-list-item routerLink="dashboard">
+          <i class="material-icons">logout</i>
+          Sair
+        </a>
+  
+  
+      </mat-nav-list>
+  
+    </mat-drawer>
+  
+    <!--Lado direito da tela-->
+    <div class="sidenav-content">
+      <!--Inserção do Header-->
+      <app-header></app-header>
+      <button class="menu mat-elevation-z8" (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon title="Menu Principal">menu</mat-icon>
+      </button>
+      <!--Roteando os SubMenus-->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-container>
+ 

@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    background-image: url("assets/imagens/planofundoalho.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+   // opacity: 0.80;
+  }
+  
+
+
