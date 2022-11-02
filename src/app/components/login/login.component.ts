@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Credenciais } from 'src/app/models/credenciais';
 import { ToastrService } from 'ngx-toastr/public_api';
+import { Credenciais } from 'src/app/models/credenciais';
 import { AlertService } from 'src/app/services/alert.service';
 
 //import { AuthService } from 'src/app/services/auth.service';
@@ -32,12 +32,14 @@ export class LoginComponent implements OnInit {
     private router: Router
   ){}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
 
   public logar(): void {
     //Mensagem que aparece na tela de login 
-    this.router.navigate([''])
-   // this.alertService.error("Login e/ou senha inválidos","Erro no Login!");
+    this.router.navigate(['home'])
+    this.alertService.error("Login e/ou senha inválidos","Erro no Login!");
   
   
        //  this.service.authenticate(this.creds).subscribe(resposta => {

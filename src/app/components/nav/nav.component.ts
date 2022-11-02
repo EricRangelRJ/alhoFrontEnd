@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
 
   //Chama o componente HOME ao iniciar a página principal do sistema
   ngOnInit(): void {
-    this.router.navigate(['home'])
+    //this.router.navigate(['home'])
   }
 
 }
