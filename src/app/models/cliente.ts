@@ -1,13 +1,14 @@
-export interface Cliente{
-    id?: any;
+import { Endereco } from "./endereco";
+
+export class Cliente{
+    idCliente: number;
     nome: string;
     cpf: string;
-    dataNascimento: any;
+    dataNascimento: string;
     telefone1: string;
     telefone2: string;
-    observacao: string;
-    endereco: string [] ;
-    pedidos:string[];
     email: string;
-    senha: string;
+    observacao: string;
+    endereco: Endereco = new Endereco;
+  //  pedidos:string[];
 }

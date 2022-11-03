@@ -1,46 +1,61 @@
 <div class="container">
   
   <h1>Controle de Clientes</h1>
+  <a mat-button color="warn" routerLink="/cadastrarCliente">Adicionar novo cliente</a>
+  <br>
+  <br>
   
-  <table class = "tabela" mat-table [dataSource]="dataSource">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef> Código </th>
-        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+  <table class = "tabela" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" >
+
+      <!-- código Column -->
+      <ng-container matColumnDef="idCliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.idCliente}} </td>
       </ng-container>
   
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container matColumnDef="endereco">
-        <th mat-header-cell *matHeaderCellDef> Endereço </th>
-        <td mat-cell *matCellDef="let element"> {{element.endereco}} </td>
-      </ng-container>
-  
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="bairro">
-        <th mat-header-cell *matHeaderCellDef> Bairro </th>
-        <td mat-cell *matCellDef="let element"> {{element.bairro}} </td>
+      <!-- nome Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
       </ng-container>
 
-      
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="telefone">
+      <!-- Nascimento Column -->
+      <ng-container matColumnDef="dataNascimento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nascimento </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.dataNascimento | data}} </td>
+      </ng-container>
+  
+      <!-- cpf Column -->
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef> CPF </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
+      </ng-container>
+  
+      <!-- email Column -->
+      <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef> Endereço </th>
+        <td mat-cell *matCellDef="let cliente">
+          <div *ngIf="cliente.endereco">
+            {{cliente.endereco.logradouro}}, {{cliente.endereco.numero}}, {{cliente.endereco.bairro}}
+          </div>
+          <div *ngIf="!cliente.endereco">
+            <span> <i>Não cadastrado</i> </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- telefone Column -->
+      <ng-container matColumnDef="telefone1">
         <th mat-header-cell *matHeaderCellDef> Telefone </th>
-        <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.telefone1}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]"
                    showFirstLastButtons 
-                   aria-label="Select page of periodic elements">
+                   aria-label="Selecionar página">
     </mat-paginator>
   </div>
