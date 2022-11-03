@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr/public_api';
 import { Credenciais } from 'src/app/models/credenciais';
 import { AlertService } from 'src/app/services/alert.service';
-
-//import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     //Inicializando via construtor o componente que dispara mensagens na tela de login
     private alertService: AlertService,
-    //private loginService: LoginService,
-   // private service: AuthService,
+   // private loginService: LoginService,
+    private service: AuthService,
     private router: Router
   ){}
 
@@ -37,17 +35,17 @@ export class LoginComponent implements OnInit {
    }
 
   public logar(): void {
-    //Mensagem que aparece na tela de login 
-    this.router.navigate(['home'])
-    this.alertService.error("Login e/ou senha inválidos","Erro no Login!");
-  
-  
-       //  this.service.authenticate(this.creds).subscribe(resposta => {
-  //    this.service.successfulLogin(resposta.headers.get('Authorization').substring(7));
-  //    this.router.navigate([''])
-   // }, () => {
-    
- //   })
+    this.service.authenticate(this.creds).subscribe(resposta => {
+      //Mensagem que aparece na tela de login 
+      this.alertService.success(resposta.headers.get('Authorization'));
+      //this.service.successfulLogin(resposta.headers.get('Authorization').substring(7));
+      //Navegando para a rota após o login
+      this.router.navigate([''])
+    }, () => {
+
+      this.alertService.error('Usuário ou Senha Inválidos!');
+
+    })
   }
 
  //Método que aplica a validação dos campos do fomrulário
