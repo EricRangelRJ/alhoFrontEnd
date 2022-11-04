@@ -1,7 +1,7 @@
 import { Endereco } from "./endereco";
 
 export class Cliente{
-    idCliente: number;
+    idCliente?: number;
     nome: string;
     cpf: string;
     dataNascimento: string;
@@ -10,5 +10,5 @@ export class Cliente{
     email: string;
     observacao: string;
     endereco: Endereco = new Endereco;
-  //  pedidos:string[];
+    pedidos:string[];
 }
