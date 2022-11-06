@@ -14,7 +14,9 @@ const routes: Routes = [
 
   { path: 'login', component : LoginComponent},
 
-  {  path: '', component: NavComponent, canActivate:[AuthGuard], children: [
+  {  path: '', component: NavComponent, 
+    //canActivate:[AuthGuard],
+       children: [
       { path:  'home' ,   component: HomeComponent},
       { path: 'clientes', component: ClientesComponent},
       { path: 'usuarios', component: UsuarioComponent},
@@ -22,7 +24,6 @@ const routes: Routes = [
     ]
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

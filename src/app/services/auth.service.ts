@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 import { API_CONFIG } from '../config/api.config';
 import { Credenciais } from '../models/credenciais';
@@ -10,15 +10,15 @@ import { Credenciais } from '../models/credenciais';
 })
 export class AuthService {
 
-  jwtService: JwtHelperService = new JwtHelperService();
+  // URL API WEB
+  endpoint = API_CONFIG.baseUrl + "/api/auth";
 
-  constructor(private http: HttpClient) { }
+  // INJEÇÃO DE DEPENDÊNCIA
+  constructor(private httpClient: HttpClient) { }
 
-  authenticate(creds: Credenciais) {
-    return this.http.post(`${API_CONFIG.baseUrl}/api/auth`, creds, {
-      observe: 'response',
-      responseType: 'text'
-    })
+  // AUTENTICAR
+  autenticar(credenciais : Credenciais){
+    return this.httpClient.post(this.endpoint, credenciais);
   }
 
   successfulLogin(authToken: string) {
@@ -26,15 +26,15 @@ export class AuthService {
     localStorage.setItem('token', authToken);
   }
 
-  isAuthenticated() {
-    let token = localStorage.getItem('token')
-    if (token != null) {
-      return !this.jwtService.isTokenExpired(token)
-    }
-    return false
+  // BUSCAR USUÁRIO AUTENTICADO
+  usuarioAutenticado() {
+
+    const authUser = JSON.parse(localStorage.getItem('AUTH') as any);
+    return authUser;
   }
 
   logout() {
     localStorage.clear();
   }
+
 }
