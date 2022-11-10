@@ -14,5 +14,3 @@ export class DataPipe implements PipeTransform {
   }
 
 }
-
-
