@@ -1,5 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ItemPedido } from '../../models/itemPedido';
+import { Pedido } from '../../models/pedido';
+import { PedidosService } from '../../services/pedidos.service';
 
 @Component({
   selector: 'app-pedidos-list',
@@ -7,62 +15,82 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pedidos-list.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class PedidosListComponent implements OnInit {
 
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['Codigo', 'Data', 'Cliente', 'Valor'];
+  dataSource = new MatTableDataSource<Pedido>;
+  columnsToDisplay = ['numeroPedido', 'dataPedido', 'cliente', 'total', 'situacao'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: PeriodicElement | null;
+  expandedElement: Pedido | null;
 
-  constructor() { }
+  listaPedidos: Pedido[] = [];
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(
+    private pedidoService: PedidosService,
+    private snackBar: MatSnackBar,
+    private _liveAnnouncer: LiveAnnouncer
+  ) { }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 
   ngOnInit(): void {
+    this.buscarTodos();
+  }
+
+  // BUSCAR TODOS
+  buscarTodos(): void {
+
+    this.pedidoService.buscarTodos().subscribe({
+
+      next: pedidos => {
+
+        // recebendo um lista de pedidos
+        this.listaPedidos = pedidos;
+
+        this.listaPedidos.forEach(function (pedido) {
+
+          // recebendo um lista de ítens de cada pedido
+          const itens = pedido.itens;
+
+          // exibindo a lista
+          console.log(itens);
+        });
+
+        this.dataSource = new MatTableDataSource<Pedido>(this.listaPedidos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error: e => {
+        console.log(e.error);
+        const msg: string = "Erro obtendo pedidos.";
+        this.snackBar.open(msg, "Erro", { duration: 5000 });
+      }
+    })
+
+  }
+
+  // FILTRO
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }
-
-export interface PeriodicElement {
-  Cliente: string;
-  Codigo: number;
-  Data: string;
-  Valor: string;
-  description: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    Codigo: 1,
-    Cliente: 'Eric Leonardo Santos Rangel',
-    Data: '02/09/2022',
-    Valor: '15,00',
-    description: 'Aqui na linha expandida serão exibidos outros dados detalhados do pedido.',
-  },
-  {
-    Codigo: 2,
-    Cliente: 'Enzo Davi da Costa Rangel',
-    Data: '06/09/2022',
-    Valor: '30,00',
-    description: 'Aqui na linha expandida serão exibidos outros dados detalhados do pedido.',
-  },
-  {
-    Codigo: 3,
-    Cliente: 'Eloá da Costa Rangel',
-    Data: '09/09/2022',
-    Valor: '20,00',
-    description: 'Aqui na linha expandida serão exibidos outros dados detalhados do pedido.',
-  },
-  {
-    Codigo: 4,
-    Cliente: 'Bruna Nunes da Costa Rangel',
-    Data: '02/11/2022',
-    Valor: '35,00',
-    description: 'Aqui na linha expandida serão exibidos outros dados detalhados do pedido.',
-  },
-  
-];

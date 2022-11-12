@@ -9,7 +9,7 @@ import { ClientesService } from '../../services/clientes.service';
 
 
 @Component({
-  selector: 'app-clientes',
+  selector: 'app-clientes-list',
   templateUrl: './clientes-list.component.html',
   styleUrls: ['./clientes-list.component.scss']
 })
@@ -65,6 +65,7 @@ export class ClientesListComponent implements OnInit, AfterViewInit {
       })
   }
 
+  // FILTRO
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

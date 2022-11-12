@@ -12,6 +12,8 @@ import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
 import { ClientesModule } from './clientes/clientes.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { LoginModule } from './login/login.module';
+import { ProdutosModule } from './produtos/produtos.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { PedidosModule } from './pedidos/pedidos.module';
     HomeModule,
     ClientesModule,
     UsuariosModule,
-    PedidosModule
+    PedidosModule,
+    ProdutosModule,
+    LoginModule
     
     ],
   providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl}],

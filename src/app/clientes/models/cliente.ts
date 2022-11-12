@@ -1,4 +1,4 @@
-import { Endereco } from "../../models/endereco";
+import { Endereco } from "src/app/shared/models/endereco";
 
 export class Cliente{
     idCliente?: number;
@@ -9,6 +9,5 @@ export class Cliente{
     telefone2: string;
     email: string;
     observacao: string;
-    endereco: Endereco = new Endereco;
-    pedidos:string[];
+    endereco: Endereco;
 }

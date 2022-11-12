@@ -1,9 +1,54 @@
-<h1>Controle de Pedidos</h1>
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+
+<div class="container">
+    <h1>Controle de Pedidos</h1>
+
+    <!-- Filtro -->
+    <div class="filter">
+        <mat-form-field appearance="standard">
+            <mat-label>Filtro</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="pesquisar" #input>
+        </mat-form-field>
+    </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+
+    <!-- Código -->
+    <ng-container matColumnDef="numeroPedido">
+        <th mat-header-cell *matHeaderCellDef> Nº pedido</th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.numeroPedido}} </td>
     </ng-container>
+
+    <!-- Data -->
+    <ng-container matColumnDef="dataPedido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.dataPedido | data}} </td>
+    </ng-container>
+
+    <!-- Cliente -->
+    <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.cliente.nome}} </td>
+    </ng-container>
+
+    <!-- Total -->
+    <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.total}} </td>
+    </ng-container>
+
+    <!-- Situação -->
+    <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef> Situação </th>
+        <td mat-cell *matCellDef="let pedido"> {{pedido.situacao}} </td>
+    </ng-container>
+
+    <!-- Mensagem exibida quando não há dados correspondentes na filtragem -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Não encontrado: "{{input.value}}"</td>
+    </tr>
+
+    <!-- Expandir elementos-->
     <ng-container matColumnDef="expand">
         <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
         <td mat-cell *matCellDef="let element">
@@ -14,29 +59,75 @@
             </button>
         </td>
     </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    
+    <!-- Conteúdo estendido - Detalhes do pedido -->
     <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="example-element-diagram">
-                    <div class="example-element-position"> {{element.position}} </div>
-                    <div class="example-element-symbol"> {{element.symbol}} </div>
-                    <div class="example-element-name"> {{element.cliente}} </div>
-                    <div class="example-element-weight"> {{element.codigo}} </div>
+        <td mat-cell *matCellDef="let pedido" [attr.colspan]="columnsToDisplayWithExpand.length">
+            <div class="example-element-detail" [@detailExpand]="pedido == expandedElement ? 'expanded' : 'collapsed'">
+
+                <div class="example-element-description">
+                    <div>
+                        Vendedor(a):
+                        <span class="example-element-description-attribution"> </span>
+                    </div>
+                    <div>
+                        Data da entrega:
+                        <span class="example-element-description-attribution"> </span>
+                    </div>
+                    <div>
+                        Desconto aplicado:
+                        <span class="example-element-description-attribution"> </span>
+                    </div>
+                    <br>
+                    <div>
+                        Ítens do pedido:
+                        <span class="example-element"> </span>
+                    </div>
                 </div>
                 <div class="example-element-description">
-                    {{element.description}}
-                    <span class="example-element-description-attribution"> </span>
+                    <div> {{pedido.vendedor.nome}} </div>
+                    <div>
+                        <div *ngIf="pedido.dataEntrega">
+                            {{pedido.dataEntrega | data}}
+                        </div>
+                        <div *ngIf="!pedido.dataEntrega">
+                            <span> <i>Não informada</i> </span>
+                        </div>
+                    </div>
+                    <div> {{pedido.desconto}} </div>
+                    <br>
+                    <div >
+                        
+                        <div *ngFor="let item of pedido.itens">
+                           {{item.produto.nomeProduto}},
+                           {{item.produto.codigo}},
+                           {{item.produto.descricao}},                
+                           {{item.produto.peso}},                
+                           {{item.quantidade}},
+                           {{item.preco}},
+                           {{item.subTotal}}, 
+                        </div>
+                    
+                    </div>
                 </div>
+                
             </div>
         </td>
     </ng-container>
 
+    <!-- Definição das colunas e linhas -->
     <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
     <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
         [class.example-expanded-row]="expandedElement === element"
         (click)="expandedElement = expandedElement === element ? null : element">
     </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> 
+
+
 </table>
+
+<!-- Paginação -->
+<div class="container">
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" showFirstLastButtons aria-label="Selecionar página">
+    </mat-paginator>
+</div>

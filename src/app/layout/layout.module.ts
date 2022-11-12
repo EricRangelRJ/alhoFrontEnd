@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { LayoutRoutingModule } from './layout-routing.module';
+import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
-import { SharedModule } from '../shared/shared.module';
+import { LayoutRoutingModule } from './layout-routing.module';
 
 
 @NgModule({
