@@ -1,10 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { ItemPedido } from '../../models/itemPedido';
 import { Pedido } from '../../models/pedido';
 import { PedidosService } from '../../services/pedidos.service';

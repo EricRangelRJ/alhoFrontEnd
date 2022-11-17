@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
