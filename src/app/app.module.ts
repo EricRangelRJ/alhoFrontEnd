@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,24 +14,26 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { LoginModule } from './login/login.module';
 import { ProdutosModule } from './produtos/produtos.module';
+import { FornecedoresModule } from './fornecedores/fornecedores.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     HomeModule,
     ClientesModule,
     UsuariosModule,
     PedidosModule,
     ProdutosModule,
-    LoginModule
-    
+    LoginModule,
+    FornecedoresModule
+
     ],
   providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl}],
   bootstrap: [AppComponent]

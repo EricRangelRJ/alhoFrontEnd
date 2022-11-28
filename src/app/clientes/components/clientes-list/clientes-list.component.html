@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <h1>Controle de Clientes</h1>
 
   <!-- Botão de cadastro -->
@@ -10,74 +10,76 @@
     </a>
   </div>
   <br><br>
-  
+
   <!-- Filtro -->
-  <div class="filter">
-    <mat-form-field appearance="standard">
-      <mat-label>Filtro</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="pesquisar" #input>
-    </mat-form-field>
-  </div>
-  
+  <mat-form-field class="filter">
+    <mat-label class="filter">Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="pesquisar" #input>
+  </mat-form-field>
+
   <!-- Tabela -->
-  <table class = "tabela" mat mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" >
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
 
-      <!-- Código -->
-      <ng-container matColumnDef="idCliente">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
-        <td mat-cell *matCellDef="let cliente"> {{cliente.idCliente}} </td>
-      </ng-container>
-  
-      <!-- Nome -->
-      <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-        <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
-      </ng-container>
+    <!-- Código -->
+    <ng-container matColumnDef="idCliente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.idCliente}} </td>
+    </ng-container>
 
-      <!-- Nascimento -->
-      <ng-container matColumnDef="dataNascimento">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nascimento </th>
-        <td mat-cell *matCellDef="let cliente"> {{cliente.dataNascimento | data}} </td>
-      </ng-container>
-  
-      <!-- Cpf -->
-      <ng-container matColumnDef="cpf">
-        <th mat-header-cell *matHeaderCellDef> CPF </th>
-        <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
-      </ng-container>
-  
-      <!-- Endereço -->
-      <ng-container matColumnDef="endereco">
-        <th mat-header-cell *matHeaderCellDef> Endereço </th>
-        <td mat-cell *matCellDef="let cliente">
-          <div *ngIf="cliente.endereco">
-            {{cliente.endereco.logradouro}}, {{cliente.endereco.numero}}, {{cliente.endereco.bairro}}
-          </div>
-          <div *ngIf="!cliente.endereco">
-            <span> <i>Não cadastrado</i> </span>
-          </div>
-        </td>
-      </ng-container>
+    <!-- Nome -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
+    </ng-container>
 
-      <!-- Telefone -->
-      <ng-container matColumnDef="telefone1">
-        <th mat-header-cell *matHeaderCellDef> Telefone </th>
-        <td mat-cell *matCellDef="let cliente"> {{cliente.telefone1}} </td>
-      </ng-container>
-  
-      <!-- Mensagem exibida quando não há dados correspondentes na filtragem -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">Não encontrado: "{{input.value}}"</td>
-      </tr>
+    <!-- Nascimento -->
+    <ng-container matColumnDef="dataNascimento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nascimento </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.dataNascimento | data}} </td>
+    </ng-container>
 
-      <!-- Definição das colunas e linhas -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <!-- Paginação -->
-    <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]"
-                   showFirstLastButtons 
-                   aria-label="Selecionar página">
-    </mat-paginator>
-  </div>
+    <!-- Cpf -->
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef> CPF </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.cpf}} </td>
+    </ng-container>
+
+    <!-- Endereço -->
+    <ng-container matColumnDef="endereco">
+      <th mat-header-cell *matHeaderCellDef> Endereço </th>
+      <td mat-cell *matCellDef="let cliente">
+        <div *ngIf="cliente.endereco">
+          {{cliente.endereco.logradouro}}, {{cliente.endereco.numero}}, {{cliente.endereco.bairro}}
+        </div>
+        <div *ngIf="!cliente.endereco">
+          <span> <i>Não cadastrado</i> </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Telefone -->
+    <ng-container matColumnDef="telefone1">
+      <th mat-header-cell *matHeaderCellDef> Telefone </th>
+      <td mat-cell *matCellDef="let cliente"> {{cliente.telefone1}} </td>
+    </ng-container>
+
+    <!-- Definição das colunas e linhas -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Mensagem exibida quando não há dados correspondentes na filtragem -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Não encontrado: "{{input.value}}"</td>
+    </tr>
+
+  </table>
+  <br>
+
+  <!-- Paginação -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 25]"
+    showFirstLastButtons
+    aria-label="Selecionar página">
+  </mat-paginator>
+
+</div>

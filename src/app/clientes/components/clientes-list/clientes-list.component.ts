@@ -1,9 +1,9 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from 'src/app/clientes/models/cliente';
 import { ClientesService } from '../../services/clientes.service';
 
@@ -23,9 +23,9 @@ export class ClientesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private clienteService: ClientesService, 
+    private clienteService: ClientesService,
     private snackBar: MatSnackBar,
-    private _liveAnnouncer: LiveAnnouncer) 
+    private _liveAnnouncer: LiveAnnouncer)
   { }
 
   ngAfterViewInit() {
