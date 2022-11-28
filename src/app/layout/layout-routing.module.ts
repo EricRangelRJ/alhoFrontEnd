@@ -1,3 +1,5 @@
+import { VendedoresCadComponent } from './../../vendedores/components/vendedores-cad/vendedores-cad.component';
+import { VendedoresListComponent } from './../../vendedores/components/vendedores-list/vendedores-list.component';
 import { FornecedoresCadComponent } from '../fornecedores/components/fornecedores-cad/fornecedores-cad.component';
 import { FornecedoresListComponent } from '../fornecedores/components/fornecedores-list/fornecedores-list.component';
 import { NgModule } from '@angular/core';
@@ -28,6 +30,9 @@ const routes: Routes = [
       { path: 'cadastrar-produto', component: ProdutosCadComponent },
       { path: 'fornecedores-lista', component: FornecedoresListComponent },
       { path: 'cadastrar-fornecedor', component: FornecedoresCadComponent },
+      { path: 'vendedores-lista', component: VendedoresListComponent },
+      { path: 'cadastrar-vendedor', component: VendedoresCadComponent },
+
 
     ]
   }

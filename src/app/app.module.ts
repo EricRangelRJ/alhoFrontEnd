@@ -15,6 +15,7 @@ import { PedidosModule } from './pedidos/pedidos.module';
 import { LoginModule } from './login/login.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { FornecedoresModule } from './fornecedores/fornecedores.module';
+import { VendedoresModule } from 'src/vendedores/vendedores.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FornecedoresModule } from './fornecedores/fornecedores.module';
     PedidosModule,
     ProdutosModule,
     LoginModule,
-    FornecedoresModule
+    FornecedoresModule,
+    VendedoresModule
 
     ],
   providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl}],

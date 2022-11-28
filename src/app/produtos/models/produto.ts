@@ -1,6 +1,8 @@
+import { Fornecedor } from "src/app/fornecedores/models/fornecedor";
+
 export class Produto {
 
-    idProduto?: number;
+  idProduto?: number;
 	nomeProduto: string;
 	codigo: string;
 	descricao: string;
@@ -10,6 +12,6 @@ export class Produto {
 	valorCusto: string;
 	valorVenda: string;
 	margemLucro: string;
-	//fornecedor: Fornecedor;
+	fornecedor: Fornecedor;
 
 }

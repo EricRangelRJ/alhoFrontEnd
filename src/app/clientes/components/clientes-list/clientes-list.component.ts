@@ -16,7 +16,7 @@ import { ClientesService } from '../../services/clientes.service';
 export class ClientesListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<Cliente>;
-  displayedColumns: string[] = ['nome', 'endereco', 'telefone1'];
+  displayedColumns: string[] = ['nome', 'endereco', 'telefone'];
   clientes: Cliente[] = [];
 
   @ViewChild(MatSort) sort: MatSort;

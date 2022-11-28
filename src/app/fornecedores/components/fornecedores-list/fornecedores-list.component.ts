@@ -13,7 +13,7 @@ import { FornecedoresService } from '../../services/fornecedores.service';
 export class FornecedoresListComponent implements OnInit{
 
   dataSource = new MatTableDataSource<Fornecedor>;
-  displayedColumns: string[] = ['idFornecedor', 'nome', 'cnpj', 'telefone1'];
+  displayedColumns: string[] = ['idFornecedor', 'nome', 'cnpj', 'telefone'];
   fornecedores: Fornecedor[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
