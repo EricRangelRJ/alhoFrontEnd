@@ -31,6 +31,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { UsuarioComponent } from './components/usuario/usuario_list.component';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { UsuarioComponent } from './components/usuario/usuario_list.component';
     MatInputModule,
     HttpClientModule,
     ],
-  providers: [],
+  providers: [ AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

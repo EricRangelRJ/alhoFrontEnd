@@ -1,11 +1,19 @@
 <h1>Controle de Usuários</h1>
+
 <div class="container">
+
+
+  <mat-form-field>
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Informe qualquer trecho dos dados da tabela..." #input>
+  </mat-form-field>
+
     <table class = "tabela" mat-table [dataSource]="dataSource">
   
       <!-- Position Column -->
-      <ng-container matColumnDef="cod">
+      <ng-container matColumnDef="idUsuario">
         <th mat-header-cell *matHeaderCellDef> Código </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.idUsuario}} </td>
       </ng-container>
   
       <!-- Name Column -->
@@ -19,7 +27,7 @@
         <th mat-header-cell *matHeaderCellDef> E-Mail </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
@@ -28,4 +36,9 @@
                    showFirstLastButtons 
                    aria-label="Select page of periodic elements">
     </mat-paginator>
+    
+    <button mat-fab color="warn">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  
   </div>

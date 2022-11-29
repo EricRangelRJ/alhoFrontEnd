@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Usuario } from 'src/app/models/usuario';
-
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-usuario',
@@ -10,34 +10,35 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./usuario-list.component.scss']
 })
 export class UsuarioComponent implements OnInit {
-
-  displayedColumns: string[] = ['cod', 'login', 'email'];
-  dataSource = new MatTableDataSource<Usuario>(ELEMENT_DATA);
-
-  constructor() { }
+  
+  ELEMENT_DATA: Usuario[] = []
+  
+  displayedColumns: string[] = ['idUsuario', 'login', 'email'];
+  dataSource = new MatTableDataSource<Usuario>(this.ELEMENT_DATA);
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
+  constructor(
+    private service: UsuarioService
+     ) { }
 
   ngOnInit(): void {
+    this.findAll();
   }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  findAll(){
+    this.service.findAll().subscribe( resposta =>  {
+       this.ELEMENT_DATA = resposta
+       this.dataSource = new MatTableDataSource<Usuario>(resposta);
+       this.dataSource.paginator = this.paginator;
+    })
+  }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
 
-const ELEMENT_DATA: Usuario[] = [
-  {id: 1, nome: 'Eric Rangel', email: 'ericlsrangel@gmail.com',senha: ""} ,
-  {id: 2, nome: 'Bruna Rangel', email: 'brunarangel@gmail.com', senha:""},
-  {id: 3, nome: 'Eloa Rangel', email: 'brunarangel@gmail.com', senha:""},
-  {id: 4, nome: 'Enzo Rangel', email: 'enzorangel@gmail.com', senha:""},
-  {id: 5, nome: 'Augusto Rangel', email: 'augustorangel@gmail.com', senha:""},
-  {id: 6, nome: 'Eliane Rangel', email: 'elianerangel@gmail.com', senha:""},
-  {id: 7, nome: 'Leandro Rangel', email: 'leandrorangel@gmail.com', senha:""},
-  {id: 7, nome: 'Leandro Rangel', email: 'leandrorangel@gmail.com', senha:""},
-  {id: 7, nome: 'Leandro Rangel', email: 'leandrorangel@gmail.com', senha:""},
-  {id: 7, nome: 'Leandro Rangel', email: 'leandrorangel@gmail.com', senha:""},
-  {id: 7, nome: 'Leandro Rangel', email: 'leandrorangel@gmail.com', senha:""},
-];
 
