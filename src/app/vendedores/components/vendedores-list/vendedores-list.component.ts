@@ -2,8 +2,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Vendedor } from 'src/vendedores/models/vendedor';
-import { VendedoresService } from 'src/vendedores/services/vendedores.service';
+import { Vendedor } from '../../models/vendedor';
+import { VendedoresService } from '../../services/vendedores.service';
 
 @Component({
   selector: 'app-vendedores-list',

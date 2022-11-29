@@ -8,14 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeModule } from './home/home.module';
-import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
 import { ClientesModule } from './clientes/clientes.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { LoginModule } from './login/login.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { FornecedoresModule } from './fornecedores/fornecedores.module';
-import { VendedoresModule } from 'src/vendedores/vendedores.module';
+import { VendedoresModule } from './vendedores/vendedores.module';
+import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
+
 
 
 @NgModule({

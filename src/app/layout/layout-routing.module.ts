@@ -1,5 +1,5 @@
-import { VendedoresCadComponent } from './../../vendedores/components/vendedores-cad/vendedores-cad.component';
-import { VendedoresListComponent } from './../../vendedores/components/vendedores-list/vendedores-list.component';
+import { VendedoresCadComponent } from '../vendedores/components/vendedores-cad/vendedores-cad.component';
+import { VendedoresListComponent } from '../vendedores/components/vendedores-list/vendedores-list.component';
 import { FornecedoresCadComponent } from '../fornecedores/components/fornecedores-cad/fornecedores-cad.component';
 import { FornecedoresListComponent } from '../fornecedores/components/fornecedores-list/fornecedores-list.component';
 import { NgModule } from '@angular/core';
