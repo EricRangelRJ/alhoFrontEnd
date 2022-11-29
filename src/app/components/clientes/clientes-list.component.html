@@ -10,34 +10,53 @@
   <table class = "tabela" mat-table [dataSource]="dataSource">
   
       <!-- Position Column -->
-      <ng-container matColumnDef="codigo">
+      <ng-container matColumnDef="idCliente">
         <th mat-header-cell *matHeaderCellDef> Código </th>
-        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.idCliente}}</td>
       </ng-container>
   
       <!-- Name Column -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
       </ng-container>
   
       <!-- Weight Column -->
-      <ng-container matColumnDef="endereco">
-        <th mat-header-cell *matHeaderCellDef> Endereço </th>
-        <td mat-cell *matCellDef="let element"> {{element.endereco}} </td>
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef> Cpf </th>
+        <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
       </ng-container>
   
       <!-- Symbol Column -->
-      <ng-container matColumnDef="bairro">
-        <th mat-header-cell *matHeaderCellDef> Bairro </th>
-        <td mat-cell *matCellDef="let element"> {{element.bairro}} </td>
+      <ng-container matColumnDef="dataNascimento">
+        <th mat-header-cell *matHeaderCellDef> Data Nascimento </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataNascimento}} </td>
       </ng-container>
 
       
       <!-- Symbol Column -->
-      <ng-container matColumnDef="telefone">
-        <th mat-header-cell *matHeaderCellDef> Telefone </th>
-        <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+      <ng-container matColumnDef="telefone1">
+        <th mat-header-cell *matHeaderCellDef> Telefone1 </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone1}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="telefone2">
+        <th mat-header-cell *matHeaderCellDef> Telefone2 </th>
+        <td mat-cell *matCellDef="let element"> {{element.telefone2}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="observacao">
+        <th mat-header-cell *matHeaderCellDef> Observações </th>
+        <td mat-cell *matCellDef="let element"> {{element.observacao}} </td>
       </ng-container>
 
          <!-- Symbol Column -->
@@ -55,7 +74,7 @@
                    aria-label="Select page of periodic elements">
     </mat-paginator>
     
-    <button mat-fab color="warn">
+    <button routerLink="create" mat-fab color="warn">
       <mat-icon>plus_one</mat-icon>
     </button>
   </div>

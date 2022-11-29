@@ -1,13 +1,10 @@
 export interface Cliente{
-    id?: any;
+    idCliente: string;
     nome: string;
     cpf: string;
-    dataNascimento: any;
+    dataNascimento: string;
     telefone1: string;
     telefone2: string;
-    observacao: string;
-    endereco: string [] ;
-    pedidos:string[];
     email: string;
-    senha: string;
-}
+    observacao: string;
+    }

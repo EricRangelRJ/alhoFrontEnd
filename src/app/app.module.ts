@@ -32,6 +32,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { UsuarioComponent } from './components/usuario/usuario_list.component';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
     UsuarioComponent,
     PedidoComponent,
     LoginComponent,
-    
-  ],
+    ClienteCreateComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

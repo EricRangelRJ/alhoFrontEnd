@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { API_CONFIG } from '../config/api.config';
-import { Usuario } from '../models/usuario';
+import { Cliente } from '../models/cliente';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${API_CONFIG.baseUrl}/usuarios`);
+    findAll(): Observable<Cliente[]> {
+      return this.http.get<Cliente[]>(`${API_CONFIG.baseUrl}/clientes`);
   }
 }
