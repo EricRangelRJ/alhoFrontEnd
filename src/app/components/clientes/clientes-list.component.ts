@@ -11,7 +11,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class ClientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['codigo', 'name', 'endereco', 'bairro','telefone' ];
+  displayedColumns: string[] = ['codigo', 'name', 'endereco', 'bairro','telefone','acoes' ];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   constructor() { }
@@ -23,6 +23,11 @@ export class ClientesComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
