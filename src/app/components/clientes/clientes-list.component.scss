@@ -25,3 +25,16 @@ h1 {
 .delete {
   color: red;
 }
+
+.fab-container{
+  position: fixed;
+  bottom: 3%;
+  z-index: z('add-button');
+}
+
+.fab{
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  margin-top: -12.5px;
+}

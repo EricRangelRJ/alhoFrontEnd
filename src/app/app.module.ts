@@ -33,6 +33,9 @@ import { PedidoComponent } from './components/pedido/pedido.component';
 import { UsuarioComponent } from './components/usuario/usuario_list.component';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
+import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
+import { CardFormComponent } from './components/util/card-form/card-form.component';
+import { CardCrudComponent } from './components/util/card-crud/card-crud.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { ClienteCreateComponent } from './components/clientes/cliente-create/cli
     PedidoComponent,
     LoginComponent,
     ClienteCreateComponent,
+    NewBtnComponent,
+    CardFormComponent,
+    CardCrudComponent,
     ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class UsuarioComponent implements OnInit {
   dataSource = new MatTableDataSource<Usuario>(this.ELEMENT_DATA);
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
+fabTooltip: string;
   
   constructor(
     private service: UsuarioService
