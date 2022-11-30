@@ -14,6 +14,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
 
@@ -34,7 +36,9 @@ import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-l
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatDialogModule,
     MatListModule,
+
   ]
 })
 export class AppMaterialModule { }

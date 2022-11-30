@@ -8,35 +8,36 @@
     align-items: center;
     justify-content: center;
  }
- 
+
  .form {
-    width: 30rem;
+    width: 20rem;
     margin: auto;
+    margin-top: auto;
     background-color: rgb(235, 235, 235);
     padding: 3rem 1rem;
     border-radius: 1rem;
  }
- 
+
  h1 {
     width: 100%;
     text-align: center;
-    
+
  }
- 
+
  img {
     height: 10rem;
     width: 60%;
     margin: -9.5rem auto -0.5rem auto;
  }
- 
+
  .full-width {
     width: 100%;
  }
- 
+
  button {
     margin-top: 1.5rem;
  }
- 
+
  mat-icon {
     opacity: .6;
  }

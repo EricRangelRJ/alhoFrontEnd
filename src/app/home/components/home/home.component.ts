@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   anoAtual: any;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -17,9 +18,9 @@ export class HomeComponent implements OnInit {
   const anoAtual = dataAtual.getFullYear();
   this.anoAtual = anoAtual;
   console.log(anoAtual);
-   
+
   }
-  
+
 }
 
 

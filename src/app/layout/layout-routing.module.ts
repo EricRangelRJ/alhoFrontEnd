@@ -1,19 +1,21 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { HomeComponent } from '../home/components/home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import { RelatoriosComponent } from './../relatorios/components/relatorios/relatorios.component';
 import { VendedoresCadComponent } from '../vendedores/components/vendedores-cad/vendedores-cad.component';
 import { VendedoresListComponent } from '../vendedores/components/vendedores-list/vendedores-list.component';
 import { FornecedoresCadComponent } from '../fornecedores/components/fornecedores-cad/fornecedores-cad.component';
 import { FornecedoresListComponent } from '../fornecedores/components/fornecedores-list/fornecedores-list.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { ClientesCadComponent } from '../clientes/components/clientes-cad/clientes-cad.component';
 import { ClientesListComponent } from '../clientes/components/clientes-list/clientes-list.component';
-import { HomeComponent } from '../home/components/home/home.component';
 import { PedidosCadComponent } from '../pedidos/components/pedidos-cad/pedidos-cad.component';
 import { PedidosListComponent } from '../pedidos/components/pedidos-list/pedidos-list.component';
 import { ProdutosCadComponent } from '../produtos/components/produtos-cad/produtos-cad.component';
 import { ProdutosListComponent } from '../produtos/components/produtos-list/produtos-list.component';
 import { UsuariosCadComponent } from '../usuarios/components/usuarios-cad/usuarios-cad.component';
 import { UsuariosListComponent } from '../usuarios/components/usuarios-list/usuarios-list.component';
-import { NavComponent } from './components/nav/nav.component';
 
 const routes: Routes = [
 
@@ -32,11 +34,10 @@ const routes: Routes = [
       { path: 'cadastrar-fornecedor', component: FornecedoresCadComponent },
       { path: 'vendedores-lista', component: VendedoresListComponent },
       { path: 'cadastrar-vendedor', component: VendedoresCadComponent },
+      { path: 'relatorios', component: RelatoriosComponent }
+    ],
 
-
-    ]
   }
-
 ];
 
 @NgModule({

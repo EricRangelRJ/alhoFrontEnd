@@ -1,3 +1,5 @@
+import { RelatoriosModule } from './relatorios/relatorios.module';
+import { httpInterceptorProviders } from './_interceptors/index';
 import { NgModule } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,13 +13,10 @@ import { HomeModule } from './home/home.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PedidosModule } from './pedidos/pedidos.module';
-import { LoginModule } from './login/login.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { FornecedoresModule } from './fornecedores/fornecedores.module';
 import { VendedoresModule } from './vendedores/vendedores.module';
 import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
-
-
 
 @NgModule({
   declarations: [
@@ -33,12 +32,14 @@ import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
     UsuariosModule,
     PedidosModule,
     ProdutosModule,
-    LoginModule,
     FornecedoresModule,
-    VendedoresModule
+    VendedoresModule,
+    UsuariosModule,
+    RelatoriosModule
 
     ],
-  providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl}],
+  providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl},
+  httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,33 @@
+<div class="container">
+  <form [formGroup]="form" fxLayoutAlign="center" novalidate class="form mat-elevation-z8">
+
+    <!--<h1>Princesinha do Alho</h1>-->
+
+    <img src="assets/imagens/alho.png" alt="Sistema Princesinha do Alho">
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input
+        formControlName="email"
+        required
+        name="email"
+        matInput placeholder="Ex. fulano@mail.com"
+      >
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input type="password"
+        formControlName="senha"
+        required
+        name="senha"
+        matInput placeholder="Ex. 123"
+      >
+    </mat-form-field>
+    <a style="color: red;" href target="#">Esqueci minha senha!</a>
+
+    <button [disabled]="form.invalid" (click)="logar()" class="full-width mat-elevation-z4" mat-stroked-button color="primary">Login</button>
+  </form>
+
+</div>
