@@ -3,6 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ClienteListar } from 'src/app/models/cliente/cliente.entity';
 
 
 
@@ -12,6 +13,12 @@ import { ClienteService } from 'src/app/services/cliente.service';
   styleUrls: ['./clientes-list.component.scss']
 })
 export class ClientesComponent implements OnInit {
+
+  readonly colunas = ['idCliente','nome','cpf','dataNascimento','telefone1','telefone2','email','observacoes'];
+
+  public dataSource = new MatTableDataSource<ClienteListar>();
+
+  @ViewChild (MatPaginator, { static : true}) paginator: MatPaginator;
 
   
   ELEMENT_DATA: Cliente [] = []
@@ -28,9 +35,7 @@ export class ClientesComponent implements OnInit {
     'observacao',
     'acoes'
   ]
-  dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 create: string;
   
   constructor(

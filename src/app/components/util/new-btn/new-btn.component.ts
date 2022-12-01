@@ -23,8 +23,7 @@ export class NewBtnComponent implements OnInit {
   }
 
   navigate(): void{
-    console.log(this.rota);
-    if(this.rota !== ''){
+    if(this.rota && this.rota !== ''){
         this.router.navigate([this.rota]);
       };
   

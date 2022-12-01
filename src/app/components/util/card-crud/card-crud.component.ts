@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Modelo } from 'src/app/models/modelo';
 
 @Component({
   selector: 'app-card-crud',
@@ -6,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./card-crud.component.scss']
 })
 export class CardCrudComponent implements OnInit {
+
+  //Parâmetros passados ao chamar o card-crud
+  @Input() tituloFormulario: string;
+  @Input() rotaBotaoIncluir: string;
 
   constructor() { }
 

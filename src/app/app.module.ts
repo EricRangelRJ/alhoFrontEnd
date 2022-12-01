@@ -36,6 +36,8 @@ import { ClienteCreateComponent } from './components/clientes/cliente-create/cli
 import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
 import { CardFormComponent } from './components/util/card-form/card-form.component';
 import { CardCrudComponent } from './components/util/card-crud/card-crud.component';
+import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
+import { FornecedoresCreateComponent } from './components/fornecedores/fornecedores-create/fornecedores-create.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { CardCrudComponent } from './components/util/card-crud/card-crud.compone
     NewBtnComponent,
     CardFormComponent,
     CardCrudComponent,
+    FornecedoresComponent,
+    FornecedoresCreateComponent,
     ],
   imports: [
     BrowserModule,

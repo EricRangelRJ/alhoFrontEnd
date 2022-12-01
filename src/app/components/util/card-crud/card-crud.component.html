@@ -1,1 +1,11 @@
-<p>card-crud works!</p>
+<div class="card-crud-container">
+
+  <h1>{{tituloFormulario}}</h1>
+
+  <div class="card-crud-container-content">
+    <!--Selecionando e exibindo o conteúdo do Card-->
+    <ng-content select="section.card-crud-content"></ng-content>
+
+  </div>
+  <app-new-btn [rota]="rotaBotaoIncluir"></app-new-btn>
+</div>

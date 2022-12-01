@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
 import { ClientesComponent } from './components/clientes/clientes-list.component';
+import { FornecedoresCreateComponent } from './components/fornecedores/fornecedores-create/fornecedores-create.component';
+import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -23,7 +25,8 @@ const routes: Routes = [
       { path: 'clientes/create', component: ClienteCreateComponent},
       { path: 'usuarios', component: UsuarioComponent},
       { path: 'pedidos',  component: PedidoComponent},
-      { path: 'pedidos',  component: PedidoComponent},
+      { path: 'fornecedores',  component: FornecedoresComponent},
+      { path: 'fornecedores/create', component: FornecedoresCreateComponent},
     ]
   },
 ];
