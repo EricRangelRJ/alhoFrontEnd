@@ -1,5 +1,5 @@
 .container{
-    width: 25rem;
+    width: 90%;
     margin:auto;
     padding: 1rem 1rem 3rem 1rem ;
     border-radius: .6rem;
@@ -9,6 +9,18 @@
     width: 100%;
 }
 
+.halfWidth{
+    width: 100%;
+}
+
 h1{
     text-align: center;
 }
+
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }

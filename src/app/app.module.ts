@@ -20,10 +20,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
 import { ClientesComponent } from './components/clientes/clientes-list.component';
+import { FornecedoresCreateComponent } from './components/fornecedores/fornecedores-create/fornecedores-create.component';
+import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -31,13 +35,11 @@ import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { UsuarioComponent } from './components/usuario/usuario_list.component';
-import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
-import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
-import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
+import { ActionIconComponent } from './components/util/action-icon/action-icon.component';
 import { CardFormComponent } from './components/util/card-form/card-form.component';
-import { CardCrudComponent } from './components/util/card-crud/card-crud.component';
-import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
-import { FornecedoresCreateComponent } from './components/fornecedores/fornecedores-create/fornecedores-create.component';
+import { CardListarComponent } from './components/util/card-listar/card-listar.component';
+import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,10 +54,11 @@ import { FornecedoresCreateComponent } from './components/fornecedores/fornecedo
     ClienteCreateComponent,
     NewBtnComponent,
     CardFormComponent,
-    CardCrudComponent,
+    CardListarComponent,
     FornecedoresComponent,
     FornecedoresCreateComponent,
-    ],
+    ActionIconComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -78,8 +81,9 @@ import { FornecedoresCreateComponent } from './components/fornecedores/fornecedo
     MatRadioModule,
     MatInputModule,
     HttpClientModule,
-    ],
-  providers: [ AuthInterceptorProvider],
+    MatStepperModule,
+  ],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

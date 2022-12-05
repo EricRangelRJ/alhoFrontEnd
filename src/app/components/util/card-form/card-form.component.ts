@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-form',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardFormComponent implements OnInit {
 
+  //Parâmetros passados ao chamar o card-listar
+  @Input() tituloFormulario: string;
+  
   constructor() { }
 
   ngOnInit(): void {

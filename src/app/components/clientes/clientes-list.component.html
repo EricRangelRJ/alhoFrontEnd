@@ -1,14 +1,14 @@
 <div class="container">
 
-  <!--Inicia chamando o componente card-crud e passa os parâmetros necessários-->
-  <app-card-crud 
+  <!--Inicia chamando o componente card-listar e passa os parâmetros necessários-->
+  <app-card-listar 
   tituloFormulario="Controle de Clientes"
   rotaBotaoIncluir="clientes/create"
   
   >
     
-      <!--Tag section que passa um nome de class e com isso é selecionada lá no card-crud-->
-      <section class="card-crud-content">
+      <!--Tag section que passa um nome de class e com isso é selecionada lá no card-listar-->
+      <section class="card-listar-content">
 
         <mat-form-field>
           <mat-label>Filtrar</mat-label>
@@ -20,7 +20,7 @@
           <!-- Position Column -->
           <ng-container matColumnDef="idCliente">
             <mat-header-cell *matHeaderCellDef>
-              <p><span>Código</span></p> </mat-header-cell>
+              <p><span>Código"</span></p> </mat-header-cell>
             <mat-cell *matCellDef="let coluna"> {{coluna.idCliente}}</mat-cell>
           </ng-container>
     
@@ -39,7 +39,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="dataNascimento">
             <mat-header-cell *matHeaderCellDef> Data Nascimento </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.dataNascimento}} </mat-cell>
+            <mat-cell *matCellDef="let coluna"> {{coluna.dataNascimento | date: 'dd/MM/yyyy'}} </mat-cell>
           </ng-container>
     
     
@@ -68,19 +68,31 @@
             <mat-cell *matCellDef="let coluna"> {{coluna.observacao}} </mat-cell>
           </ng-container>
     
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="acoes">
-            <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> Ações </mat-cell>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let coluna">
+              <a routerLink="" class="delete">
+                <i class="material-icons">search</i>
+              </a>
+              <a routerLink="" class="edit">
+                <i class="material-icons">edit</i>
+              </a>
+              <a class="delete" (click)="delete(coluna.idCliente)" >
+                <i class="material-icons">delete</i>
+              </a>
+       
+             
+            </mat-cell>
           </ng-container>
-    
+       
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+
     
       </section>
     
-      </app-card-crud>
+      </app-card-listar>
     
 
 

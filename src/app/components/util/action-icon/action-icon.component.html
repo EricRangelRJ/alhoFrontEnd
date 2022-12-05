@@ -1,0 +1,13 @@
+<a *ngIf="authorized" [id]="actionIcon.iconId" class="mr-2" [class.hidden]="disabled" (click)="callAction($event)">
+    <mat-icon
+      class="icon-black handCursor"
+      [svgIcon]="isSvg ? actionIcon.iconName : null"
+      [ngStyle]="{
+        'font-size.px': size && !isSvg ? size : '',
+        'width.px': size ? size : '',
+        'height.px': size ? size : ''
+      }"
+    >
+      {{ isSvg ? '' : actionIcon.iconName }}
+    </mat-icon>
+  </a>
