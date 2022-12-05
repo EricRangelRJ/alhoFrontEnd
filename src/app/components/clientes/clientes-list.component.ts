@@ -1,14 +1,13 @@
 import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import { Cliente } from 'src/app/models/cliente';
-import { ClienteService } from 'src/app/services/cliente.service';
-import { ClienteListar } from 'src/app/models/cliente/cliente.entity';
-import { ActionIcons, FuncionalidadeActionIcons } from '../util/action-icon/action-icons-const';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/models/cliente';
+import { ClienteListar } from 'src/app/models/cliente/cliente.entity';
 import { AlertService } from 'src/app/services/alert.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
-
+import { ActionIcons, FuncionalidadeActionIcons } from '../util/action-icon/action-icons-const';
 
 @Component({
   selector: 'app-clientes',
@@ -17,17 +16,19 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class ClientesComponent implements OnInit {
 
-  readonly colunas = ['idCliente','nome','cpf','dataNascimento','telefone1','telefone2','email','observacoes','actions'];
+  idCliente: string = '';
+
+  readonly colunas = ['idCliente', 'nome', 'cpf', 'dataNascimento', 'telefone1', 'telefone2', 'email', 'observacoes', 'actions'];
   public actions = FuncionalidadeActionIcons;
 
   public dataSource = new MatTableDataSource<ClienteListar>();
 
-  @ViewChild (MatPaginator, { static : true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  ELEMENT_DATA: Cliente [] = []
+  ELEMENT_DATA: Cliente[] = []
 
   displayedColumns: string[] = [
-    
+
     'idCliente',
     'nome',
     'cpf',
@@ -39,23 +40,23 @@ export class ClientesComponent implements OnInit {
     'actions'
   ]
 
-create: string;
-  
+  create: string;
+
   constructor(
     private service: ClienteService,
     private alertService: AlertService,
     private router: Router,
   ) { }
-  
+
   ngOnInit(): void {
     this.findAll();
   }
 
-  findAll(){
-    this.service.findAll().subscribe( resposta =>  {
-       this.ELEMENT_DATA = resposta
-       this.dataSource = new MatTableDataSource<Cliente>(resposta);
-       this.dataSource.paginator = this.paginator;
+  findAll() {
+    this.service.findAll().subscribe(resposta => {
+      this.ELEMENT_DATA = resposta
+      this.dataSource = new MatTableDataSource<Cliente>(resposta);
+      this.dataSource.paginator = this.paginator;
     })
   }
 
@@ -64,18 +65,23 @@ create: string;
     //TODO aqui entra a navegação para a tela de consultar
   }
 
-  delete(idCliente : string): void{
-    console.log(idCliente);
-    this.service.delete(idCliente).subscribe(() => {
-      this.alertService.success('Cliente excluído com sucesso!');
-      this.router.navigate(['clientes']);
-    },
-    deuZebra => {
-      console.log(idCliente);
-      this.alertService.error(deuZebra.message);
-    })
+  delete(idCliente: string): void {
+    console.log('deletado com sucesso!');
+    this.service.delete(idCliente).subscribe(
+      () => { },
+      resp => {
+
+        if (resp.status == 200) {
+          this.alertService.success('Cliente deletado com sucesso');
+          this.router.navigate(['clientes']);
+        }
+        if (resp.status == 409) {
+          this.alertService.info(resp.error.message, 'Importante:');
+          this.router.navigate(['clientes']);
+        }
+      })
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

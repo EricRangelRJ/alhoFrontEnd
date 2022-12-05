@@ -31,7 +31,27 @@ export class ClienteCreateComponent implements OnInit {
     logradouro: '',
     observacao: '',
   }
-  
+
+  //Cliente MOCK para testes de preenchimento rápido sem passar pelo Form
+  clienteMock: ClientePostDTO = {
+    idCliente: null,
+    nome: 'Eric Rangel',
+    cpf: '10624022781',
+    dataNascimento: '1985-08-09',
+    telefone1: '21965770649',
+    telefone2: '21964502562',
+    email: 'ericlsrangel@gmail.com',
+    numero: '180',
+    complemento: 'casa 77',
+    condominio: 'Coelho da Rocha',
+    bairro: 'Rocha Sobrinho',
+    cidade: 'Mesquita',
+    estado: 'RJ',
+    cep: '26572520',
+    logradouro: 'Rua Meriti',
+    observacao: 'Rua do hospital da mãe',
+  }
+
   constructor(
     private _formBuilder: FormBuilder,
     private service: ClienteService,
@@ -49,7 +69,7 @@ export class ClienteCreateComponent implements OnInit {
     thirdCtrl: ['', Validators.required],
   });
   isLinear = false;
-  
+
   create(): void {
 
     console.log(this.cliente)
@@ -64,13 +84,15 @@ export class ClienteCreateComponent implements OnInit {
         //Se retornar um vetor de erros exibe todos os erros
         if (deuZebra.error.errors) {
           deuZebra.error.errors.forEach(element => {
+            console.log(deuZebra.erro.errors);
             this.alertService.error(element.message + '  ' + element.field);
-            console.log(deuZebra);
+            this.router.navigate(['clientes']);
           });
           //Retornando somente uma linha de erro e exibindo
         } else {
+          console.log(deuZebra.error);
           this.alertService.error(deuZebra.error.message);
-          console.log(deuZebra);
+          this.router.navigate(['clientes']);
         }
       })
   }

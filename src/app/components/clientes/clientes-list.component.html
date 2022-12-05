@@ -71,17 +71,15 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let coluna">
-              <a routerLink="" class="delete">
+              <button mat-button class="delete">
                 <i class="material-icons">search</i>
-              </a>
-              <a routerLink="" class="edit">
+              </button>
+              <button mat-button class="edit">
                 <i class="material-icons">edit</i>
-              </a>
-              <a class="delete" (click)="delete(coluna.idCliente)" >
+              </button>
+              <button mat-button (click)="delete(coluna.idCliente)" class="delete">
                 <i class="material-icons">delete</i>
-              </a>
-       
-             
+              </button>
             </mat-cell>
           </ng-container>
        
