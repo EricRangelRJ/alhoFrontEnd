@@ -1,12 +1,13 @@
-export class ClientePostDTO{
+export class ClienteRequestDTO{
 
-    idCliente?: number;
+    idCliente: string;
     nome: string;
     cpf: string;
     dataNascimento: string;
     telefone1: string;
     telefone2: string;
     email: string;
+    observacao: string;
     //Dados de endereço
     numero: string;
     complemento: string;
@@ -16,5 +17,4 @@ export class ClientePostDTO{
     estado: string;
     cep: string;
     logradouro: string;
-    observacao: string;
 }

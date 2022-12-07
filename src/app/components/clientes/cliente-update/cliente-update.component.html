@@ -63,12 +63,12 @@
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Nome do Condomínio:</mat-label>
-                        <input [(ngModel)]="cliente.condominio" name="clienteCondominio" matInput
+                        <input [(ngModel)]="cliente.condominio" name="clienteEnderecoCondominio" matInput
                             formControlName="secondCtrl" placeholder="Caso seja Condomínio informe o nome...">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Observação ou Ponto de Referência:</mat-label>
-                        <input [(ngModel)]="cliente.observacao" name="clienteObservacao" matInput
+                        <input [(ngModel)]="cliente.observacao" name="clienteEnderecoObservacao" matInput
                             formControlName="secondCtrl"
                             placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc...">
                     </mat-form-field>
@@ -84,7 +84,7 @@
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Estado:</mat-label>
-                        <input [(ngModel)]="cliente.estado" name="clienteEstado" matInput
+                        <input [(ngModel)]="cliente.estado" name="clienteEnderecoEstado" matInput
                             formControlName="secondCtrl" placeholder="Insira o estado..." required>
                     </mat-form-field>
                     <div>
@@ -115,8 +115,8 @@
                     <div>
                         <button mat-button matStepperPrevious>Voltar</button>
                         <button mat-button (click)="stepper.reset()">Limpar</button>
-                        <button mat-button (click)="create()">Cadastrar</button>
-                        <button mat-button routerLink="../" >Cancelar</button>
+                        <button mat-button (click)="update()">Atualizar</button>
+                        <button mat-button routerLink="../../">Cancelar</button>
                     </div>
                 </form>
             </mat-step>

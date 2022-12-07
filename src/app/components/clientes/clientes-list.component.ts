@@ -2,6 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, ViewChil
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ClienteRequestDTO } from 'src/app/dto/cliente/clienteRequestDTO';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteListar } from 'src/app/models/cliente/cliente.entity';
 import { AlertService } from 'src/app/services/alert.service';
@@ -18,10 +19,10 @@ export class ClientesComponent implements OnInit {
 
   idCliente: string = '';
 
-  readonly colunas = ['idCliente', 'nome', 'cpf', 'dataNascimento', 'telefone1', 'telefone2', 'email', 'observacoes', 'actions'];
+  readonly colunas = ['idCliente', 'nome', 'cpf', 'dataNascimento', 'telefone1', 'telefone2', 'email', 'observacao', 'actions'];
   public actions = FuncionalidadeActionIcons;
 
-  public dataSource = new MatTableDataSource<ClienteListar>();
+  public dataSource = new MatTableDataSource<ClienteRequestDTO>();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -55,7 +56,7 @@ export class ClientesComponent implements OnInit {
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta
-      this.dataSource = new MatTableDataSource<Cliente>(resposta);
+      this.dataSource = new MatTableDataSource<ClienteRequestDTO>(resposta);
       this.dataSource.paginator = this.paginator;
     })
   }
@@ -67,17 +68,18 @@ export class ClientesComponent implements OnInit {
 
   delete(idCliente: string): void {
     console.log('deletado com sucesso!');
-    this.service.delete(idCliente).subscribe(
-      () => { },
+    this.service.delete(idCliente)
+    .subscribe(
+      () => { 
+      },
       resp => {
-
+        
         if (resp.status == 200) {
           this.alertService.success('Cliente deletado com sucesso');
-          this.router.navigate(['clientes']);
+          this.ngOnInit()
         }
         if (resp.status == 409) {
           this.alertService.info(resp.error.message, 'Importante:');
-          this.router.navigate(['clientes']);
         }
       })
   }

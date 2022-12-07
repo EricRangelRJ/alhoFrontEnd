@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/auth.guard';
 import { ClienteCreateComponent } from './components/clientes/cliente-create/cliente-create.component';
+import { ClienteUpdateComponent } from './components/clientes/cliente-update/cliente-update.component';
 import { ClientesComponent } from './components/clientes/clientes-list.component';
 import { FornecedoresCreateComponent } from './components/fornecedores/fornecedores-create/fornecedores-create.component';
 import { FornecedoresComponent } from './components/fornecedores/fornecedores.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path:  'home' ,   component: HomeComponent},
       { path: 'clientes', component: ClientesComponent},
       { path: 'clientes/create', component: ClienteCreateComponent},
+      { path: 'clientes/update/:id', component: ClienteUpdateComponent},
       { path: 'usuarios', component: UsuarioComponent},
       { path: 'pedidos',  component: PedidoComponent},
       { path: 'fornecedores',  component: FornecedoresComponent},

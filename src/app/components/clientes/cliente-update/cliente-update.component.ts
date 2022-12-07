@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteRequestDTO } from 'src/app/dto/cliente/clienteRequestDTO';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
-  selector: 'app-cliente-create',
-  templateUrl: './cliente-create.component.html',
-  styleUrls: ['./cliente-create.component.scss']
+  selector: 'app-cliente-update',
+  templateUrl: './cliente-update.component.html',
+  styleUrls: ['./cliente-update.component.scss']
 })
-export class ClienteCreateComponent implements OnInit {
+export class ClienteUpdateComponent implements OnInit {
 
   //Objeto sendo inicializado para receber os parâmetros do form no HTML
   cliente: ClienteRequestDTO = {
-    idCliente: null,
+    idCliente: '',
     nome: '',
     cpf: '',
     dataNascimento: '',
@@ -52,11 +52,15 @@ export class ClienteCreateComponent implements OnInit {
     observacao: 'Rua do hospital da mãe',
   }
 
+
+
   constructor(
     private _formBuilder: FormBuilder,
     private service: ClienteService,
     private alertService: AlertService,
     private router: Router,
+    //Pega o parâmetro da rota
+    private route: ActivatedRoute,
   ) { }
 
   firstFormGroup = this._formBuilder.group({
@@ -70,34 +74,48 @@ export class ClienteCreateComponent implements OnInit {
   });
   isLinear = false;
 
-  create(): void {
+  ngOnInit(): void {
+    //Sempre que iniciar o componente UPDATE ele o id passado por parâmetro na rota.
+    this.cliente.idCliente = this.route.snapshot.paramMap.get('id');
+    //Busca automática ao iniciar o componente
+    this.findByid();
+  }
+
+  findByid(): void {
+    //Passando o  parâmetro da rota para o método  no sérvice e preenchendo o objeto com a resposta.
+    this.service.findById(this.cliente.idCliente).subscribe(resposta => {
+      this.cliente = resposta;
+    })
+  }
+
+  update(): void {
 
     console.log(this.cliente)
 
-    this.service.create(this.cliente).subscribe(
+    this.service.update(this.cliente).subscribe(
       () => {
-        console.log(this.clienteMock);
-        this.alertService.success('Cliente cadastrado com sucesso');
+        console.log(this.cliente);
+        console.log("entrouu antes");
+        this.alertService.success('Cliente atualizado com sucesso', 'Update');
         this.router.navigate(['clientes']);
       },
       err => {
         //Se retornar um vetor de erros exibe todos os erros
         if (err.error.errors) {
+          console.log('entrou no vetor de erros');
           err.error.errors.forEach(element => {
-            console.log(err.erro.errors);
+            console.log(element);
             this.alertService.error(element.message + '  ' + element.field);
-            this.router.navigate(['clientes']);
           });
           //Retornando somente uma linha de erro e exibindo
         } else {
-          console.log(err.error);
+          console.log('retornou somente 1  erro');
           this.alertService.error(err.error.message);
-          this.router.navigate(['clientes']);
+          console.log(err.error);
         }
       })
   }
 
-  ngOnInit(): void {
-  }
+
 
 }

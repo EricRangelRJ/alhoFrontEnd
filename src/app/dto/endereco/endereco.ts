@@ -1,5 +1,7 @@
 export class Endereco {
 
+    idEndereco: string;
+    logradouro: string;
     numero: string;
     complemento: string;
     condominio: string;
@@ -7,6 +9,4 @@ export class Endereco {
     municipio: string;
     estado: string;
     cep: string;
-    logradouro: string;
-    observacao: string;
 }

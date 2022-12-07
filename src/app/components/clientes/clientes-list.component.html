@@ -64,7 +64,7 @@
     
           <!-- Symbol Column -->
           <ng-container matColumnDef="observacao">
-            <mat-header-cell *matHeaderCellDef> Observações </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Observação </mat-header-cell>
             <mat-cell *matCellDef="let coluna"> {{coluna.observacao}} </mat-cell>
           </ng-container>
     
@@ -74,7 +74,7 @@
               <button mat-button class="delete">
                 <i class="material-icons">search</i>
               </button>
-              <button mat-button class="edit">
+              <button  mat-button routerLink="update/{{coluna.idCliente}}" class="edit">
                 <i class="material-icons">edit</i>
               </button>
               <button mat-button (click)="delete(coluna.idCliente)" class="delete">
