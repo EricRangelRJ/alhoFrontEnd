@@ -1,0 +1,82 @@
+<app-card-form tituloFormulario="Informações Completas do Cliente">
+    <section class="card-form-content">
+        <mat-card class="card mat-elevation-z8" title="Dados Principais:" class="mat-card">
+            <mat-card-header>
+                <mat-card-title class="fTexto">Dados Principais:</mat-card-title>
+            </mat-card-header>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Nome Completo:</mat-label>
+                <input class="outline" readonly="true" [(ngModel)]="cliente.nome" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>CPF:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.cpf" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Data de Nascimento:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.dataNascimento" name="nome" matInput>
+            </mat-form-field>
+        </mat-card>
+        <mat-card class="card mat-elevation-z8" title="Informações do endereço:" class="mat-card">
+            <mat-card-header>
+                <mat-card-title class="fTexto">Endereço do Cliente:</mat-card-title>
+            </mat-card-header>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Logradouro:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.logradouro" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Número:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.numero" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>CEP:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.cep" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Complemento:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.complemento" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Nome do Condomínio:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.condominio" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Observação / Ponto de Referência:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.observacao" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Bairro:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.bairro" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Municipio:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.municipio" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Estado:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.endereco.estado" name="nome" matInput>
+            </mat-form-field>
+        </mat-card>
+        <mat-card class="card mat-elevation-z8" title="Contatos do Cliente" class="mat-card">
+            <mat-card-header>
+                <mat-card-title class="fTexto">Contatos:</mat-card-title>
+            </mat-card-header>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Telefone Principal:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.telefone1" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Telefone de Recado:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.telefone2" name="nome" matInput>
+            </mat-form-field>
+            <mat-form-field class="fullWidth" appearance="legacy">
+                <mat-label>Email:</mat-label>
+                <input readonly="true" [(ngModel)]="cliente.email" name="nome" matInput>
+            </mat-form-field>
+        </mat-card>
+        <button id="btn-fab-incluir" mat-fab aria-label="Voltar" routerLink="../../" color="warn">
+            <mat-icon class="fab"></mat-icon>
+        </button>
+    </section>
+</app-card-form>

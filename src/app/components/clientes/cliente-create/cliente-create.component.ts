@@ -25,7 +25,7 @@ export class ClienteCreateComponent implements OnInit {
     complemento: '',
     condominio: '',
     bairro: '',
-    cidade: '',
+    municipio: '',
     estado: '',
     cep: '',
     logradouro: '',
@@ -45,7 +45,7 @@ export class ClienteCreateComponent implements OnInit {
     complemento: 'casa 77',
     condominio: 'Coelho da Rocha',
     bairro: 'Rocha Sobrinho',
-    cidade: 'Mesquita',
+    municipio: 'Mesquita',
     estado: 'RJ',
     cep: '26572520',
     logradouro: 'Rua Meriti',
@@ -76,7 +76,7 @@ export class ClienteCreateComponent implements OnInit {
 
     this.service.create(this.cliente).subscribe(
       () => {
-        console.log(this.clienteMock);
+        console.log(this.cliente);
         this.alertService.success('Cliente cadastrado com sucesso');
         this.router.navigate(['clientes']);
       },

@@ -71,7 +71,7 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let coluna">
-              <button mat-button class="delete">
+              <button mat-button routerLink="search/{{coluna.idCliente}}" class="search">
                 <i class="material-icons">search</i>
               </button>
               <button  mat-button routerLink="update/{{coluna.idCliente}}" class="edit">

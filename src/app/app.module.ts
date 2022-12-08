@@ -41,6 +41,8 @@ import { CardFormComponent } from './components/util/card-form/card-form.compone
 import { CardListarComponent } from './components/util/card-listar/card-listar.component';
 import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { ClienteSearchComponent } from './components/clientes/cliente-search/cliente-search.component';
+import { CardSearchComponent } from './components/util/card-search/card-search.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
     FornecedoresCreateComponent,
     ActionIconComponent,
     ClienteUpdateComponent,
+    ClienteSearchComponent,
+    CardSearchComponent,
   ],
   imports: [
     BrowserModule,

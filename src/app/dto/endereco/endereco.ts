@@ -1,6 +1,6 @@
 export class Endereco {
 
-    idEndereco: string;
+    idEndereco?: string;
     logradouro: string;
     numero: string;
     complemento: string;

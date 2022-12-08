@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { API_CONFIG } from '../config/api.config';
 import { ClienteRequestDTO } from '../dto/cliente/clienteRequestDTO';
+import { ClienteResponseDTO } from '../dto/cliente/clienteResponseDTO';
 import { Cliente } from '../models/cliente';
 
 @Injectable({
@@ -17,8 +18,8 @@ export class ClienteService {
     return this.http.get<ClienteRequestDTO[]>(`${API_CONFIG.baseUrl}/clientes`);
   }
 
-  findById(id: string): Observable<ClienteRequestDTO> {
-    return this.http.get<ClienteRequestDTO>(`${API_CONFIG.baseUrl}/clientes/${id}`);
+  findById(id: string): Observable<ClienteResponseDTO> {
+    return this.http.get<ClienteResponseDTO>(`${API_CONFIG.baseUrl}/clientes/${id}`);
   }
 
   create(cliente: ClienteRequestDTO): Observable<ClienteRequestDTO> {

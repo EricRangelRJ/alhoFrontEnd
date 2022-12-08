@@ -1,0 +1,50 @@
+.mat-card{
+    width: 100%;
+    padding-bottom: 15px;
+    width: 90%;
+    height: 50%; 
+    margin: 1rem auto;
+    background-color: rgb(236, 221, 221);
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.halfWidth{
+    width: 100%;
+}
+
+.card{
+    margin-bottom:  20px;
+}
+
+.outline{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
+.card{
+    width: 90%;
+    height: 50%; 
+    margin: 1rem auto;
+    background-color: rgb(235, 235, 235);
+    }
+.ftexto {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.fab-container{
+    position: fixed;
+    bottom: 3%;
+    z-index: z('add-button');
+  }
+  
+  .fab{
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    margin-top: -12.5px;
+  }

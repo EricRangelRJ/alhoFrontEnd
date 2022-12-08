@@ -1,4 +1,4 @@
-<app-card-form tituloFormulario="Cadastro de Clientes">
+<app-card-form tituloFormulario="Atualizar Cliente">
     <!--Tag section que passa um nome de class e com isso é selecionada lá no card-crud-->
     <section class="card-form-content">
 
@@ -9,23 +9,21 @@
     </button>
 -->
         <mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
+
             <mat-step [stepControl]="firstFormGroup" errorMessage="Campo nome é obrigratório.">
-                <form [formGroup]="firstFormGroup">
+                <form>
                     <ng-template matStepLabel>Dados Principais</ng-template>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Nome Completo</mat-label>
-                        <input [(ngModel)]="cliente.nome" name="nome" matInput placeholder=""
-                            formControlName="firstCtrl" required>
+                        <input [(ngModel)]="clienteUpdate.nome" name="nome" matInput placeholder="" required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>CPF:</mat-label>
-                        <input [(ngModel)]="cliente.cpf" name="cpf" matInput placeholder="" formControlName="firstCtrl"
-                            required>
+                        <input [(ngModel)]="clienteUpdate.cpf" name="cpf" matInput placeholder="">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Data de Nascimento:</mat-label>
-                        <input [(ngModel)]="cliente.dataNascimento" name="dataNascimento" matInput placeholder=""
-                            formControlName="firstCtrl" required>
+                        <input [(ngModel)]="clienteUpdate.dataNascimento" name="dataNascimento" matInput placeholder="">
                     </mat-form-field>
                     <div>
                         <button mat-button matStepperNext>Avançar</button>
@@ -33,59 +31,56 @@
                 </form>
             </mat-step>
             <mat-step [stepControl]="secondFormGroup">
-                <form [formGroup]="secondFormGroup">
+                <form>
                     <ng-template matStepLabel>Endereço</ng-template>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Tipo Endereço:</mat-label>
-                        <input matInput formControlName="secondCtrl" placeholder="Rua, Avenida, Estrada, Beco..."
-                            required>
+                        <input matInput placeholder="Rua, Avenida, Estrada, Beco..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Logradouro:</mat-label>
-                        <input [(ngModel)]="cliente.logradouro" name="clienteEnderecoLogradouro" matInput
-                            formControlName="secondCtrl" placeholder="Insira a descrição..." required>
+                        <input [(ngModel)]="clienteUpdate.endereco.logradouro" name="clienteEnderecoLogradouro" matInput
+                            placeholder="Insira a descrição...">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Número:</mat-label>
-                        <input [(ngModel)]="cliente.numero" name="clienteNumero" matInput
-                            formControlName="secondCtrl" placeholder="Numero da casa, prédio..." required>
+                        <input [(ngModel)]="clienteUpdate.endereco.numero" name="clienteNumero" matInput
+                            placeholder="Numero da casa, prédio..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>CEP:</mat-label>
-                        <input [(ngModel)]="cliente.cep" name="clienteCep" matInput
-                            formControlName="secondCtrl" placeholder="Numero da casa, prédio..." required>
+                        <input [(ngModel)]="clienteUpdate.endereco.cep" name="clienteCep" matInput
+                            placeholder="Numero da casa, prédio..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Complemento:</mat-label>
-                        <input
-                        [(ngModel)]="cliente.complemento" name="clienteComplemento" matInput 
-                            formControlName="secondCtrl" placeholder="Bloco/Apto, fundos..." required>
+                        <input [(ngModel)]="clienteUpdate.endereco.complemento" name="clienteComplemento" matInput
+                            placeholder="Bloco/Apto, fundos..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Nome do Condomínio:</mat-label>
-                        <input [(ngModel)]="cliente.condominio" name="clienteEnderecoCondominio" matInput
-                            formControlName="secondCtrl" placeholder="Caso seja Condomínio informe o nome...">
+                        <input [(ngModel)]="clienteUpdate.endereco.condominio" name="clienteEnderecoCondominio" matInput
+                            placeholder="Caso seja Condomínio informe o nome...">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Observação ou Ponto de Referência:</mat-label>
-                        <input [(ngModel)]="cliente.observacao" name="clienteEnderecoObservacao" matInput
-                            formControlName="secondCtrl"
+                        <input [(ngModel)]="clienteUpdate.observacao" name="clienteEnderecoObservacao" matInput
                             placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc...">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Bairro:</mat-label>
-                        <input matInput matInput  [(ngModel)]="cliente.bairro" name="clienteBairro"
-                            formControlName="secondCtrl" placeholder="Insira o nome..." required>
+                        <input matInput matInput [(ngModel)]="clienteUpdate.endereco.bairro" name="clienteBairro"
+                            placeholder="Insira o nome..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Cidade:</mat-label>
-                        <input matInput  [(ngModel)]="cliente.cidade" name="clienteCidade" 
-                            formControlName="secondCtrl" placeholder="Insira o nome..." required>
+                        <mat-label>Municipio:</mat-label>
+                        <input matInput [(ngModel)]="clienteUpdate.endereco.municipio" name="clienteMunicipio"
+                            placeholder="Insira o nome..." required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Estado:</mat-label>
-                        <input [(ngModel)]="cliente.estado" name="clienteEnderecoEstado" matInput
-                            formControlName="secondCtrl" placeholder="Insira o estado..." required>
+                        <input [(ngModel)]="clienteUpdate.endereco.estado" name="clienteEnderecoEstado" matInput
+                            placeholder="Insira o estado..." required>
                     </mat-form-field>
                     <div>
                         <button mat-button matStepperPrevious>Voltar</button>
@@ -93,35 +88,31 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step>
+            <mat-step [stepControl]="thirdFormGroup">
                 <ng-template matStepLabel>Contatos</ng-template>
-                <form [formGroup]="thirdFormGroup">
-                    <ng-template matStepLabel>Contatos</ng-template>
+                <ng-template matStepLabel>Contatos</ng-template>
+                <form>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Telefone Principal:</mat-label>
-                        <input [(ngModel)]="cliente.telefone1" name="clienteTelefone1" matInput
-                            formControlName="thirdCtrl" placeholder="" required>
+                        <input [(ngModel)]="clienteUpdate.telefone1" name="clienteUpdate.Telefone1" matInput
+                            placeholder="" required>
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Telefone Recado:</mat-label>
-                        <input [(ngModel)]="cliente.telefone2" name="clienteTelefone2" matInput
-                            formControlName="thirdCtrl" placeholder="Pai, Mãe, Vizinho.. etc">
+                        <input [(ngModel)]="clienteUpdate.telefone2" name="clienteTelefone2" matInput
+                            placeholder="Pai, Mãe, Vizinho.. etc">
                     </mat-form-field>
                     <mat-form-field class="fullWidth" appearance="fill">
                         <mat-label>Email:</mat-label>
-                        <input [(ngModel)]="cliente.email" name="clienteEmail" matInput placeholder=""
-                            formControlName="thirdCtrl" required>
+                        <input [(ngModel)]="clienteUpdate.email" name="clienteEmail" matInput placeholder="" required>
                     </mat-form-field>
                     <div>
                         <button mat-button matStepperPrevious>Voltar</button>
-                        <button mat-button (click)="stepper.reset()">Limpar</button>
                         <button mat-button (click)="update()">Atualizar</button>
                         <button mat-button routerLink="../../">Cancelar</button>
                     </div>
                 </form>
             </mat-step>
         </mat-stepper>
-
     </section>
-
 </app-card-form>

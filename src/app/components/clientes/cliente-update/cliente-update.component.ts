@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteRequestDTO } from 'src/app/dto/cliente/clienteRequestDTO';
+import { ClienteResponseDTO } from 'src/app/dto/cliente/clienteResponseDTO';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
@@ -25,11 +26,24 @@ export class ClienteUpdateComponent implements OnInit {
     complemento: '',
     condominio: '',
     bairro: '',
-    cidade: '',
+    municipio: '',
     estado: '',
     cep: '',
     logradouro: '',
     observacao: '',
+  }
+
+  clienteUpdate: ClienteResponseDTO = {
+
+    idCliente: '',
+    nome: '',
+    cpf: '',
+    dataNascimento: '',
+    telefone1: '',
+    telefone2: '',
+    email: '',
+    observacao: '',
+    endereco: null,
   }
 
   //Cliente MOCK para testes de preenchimento rápido sem passar pelo Form
@@ -45,7 +59,7 @@ export class ClienteUpdateComponent implements OnInit {
     complemento: 'casa 77',
     condominio: 'Coelho da Rocha',
     bairro: 'Rocha Sobrinho',
-    cidade: 'Mesquita',
+    municipio: 'Mesquita',
     estado: 'RJ',
     cep: '26572520',
     logradouro: 'Rua Meriti',
@@ -64,7 +78,7 @@ export class ClienteUpdateComponent implements OnInit {
   ) { }
 
   firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+    firstCtrl: ['', Validators.nullValidator],
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
@@ -80,18 +94,39 @@ export class ClienteUpdateComponent implements OnInit {
     //Busca automática ao iniciar o componente
     this.findByid();
   }
-
+  
   findByid(): void {
-    //Passando o  parâmetro da rota para o método  no sérvice e preenchendo o objeto com a resposta.
+    //Passando o  parâmetro da rota para o método  no service e preenchendo o objeto com a resposta.
     this.service.findById(this.cliente.idCliente).subscribe(resposta => {
-      this.cliente = resposta;
+      this.clienteUpdate = resposta;
+      this.cliente = this.convertDTO(resposta);
     })
   }
 
+  convertDTO(clienteUpdate: ClienteResponseDTO): ClienteRequestDTO {
+   
+    let clienteConvertido = new ClienteRequestDTO();
+    clienteConvertido.idCliente = clienteUpdate.idCliente;
+    clienteConvertido.nome = clienteUpdate.nome;
+    clienteConvertido.cpf = clienteUpdate.cpf;
+    clienteConvertido.dataNascimento = clienteUpdate.dataNascimento;
+    clienteConvertido.telefone1 = clienteUpdate.telefone1;
+    clienteConvertido.telefone2 = clienteUpdate.telefone2;
+    clienteConvertido.email = clienteUpdate.email;
+    clienteConvertido.numero = clienteUpdate.endereco.numero;
+    clienteConvertido.complemento = clienteUpdate.endereco.complemento;
+    clienteConvertido.condominio = clienteUpdate.endereco.condominio;
+    clienteConvertido.bairro = clienteUpdate.endereco.bairro;
+    clienteConvertido.municipio = clienteUpdate.endereco.municipio;
+    clienteConvertido.estado = clienteUpdate.endereco.estado;
+    clienteConvertido.cep = clienteUpdate.endereco.cep;
+    clienteConvertido.logradouro = clienteUpdate.endereco.logradouro;
+    clienteConvertido.observacao = clienteUpdate.observacao;
+    return clienteConvertido;
+  }
+
   update(): void {
-
-    console.log(this.cliente)
-
+    this.cliente = this.convertDTO(this.clienteUpdate);
     this.service.update(this.cliente).subscribe(
       () => {
         console.log(this.cliente);

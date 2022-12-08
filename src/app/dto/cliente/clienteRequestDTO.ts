@@ -13,7 +13,7 @@ export class ClienteRequestDTO{
     complemento: string;
     condominio: string;
     bairro: string;
-    cidade: string;
+    municipio: string;
     estado: string;
     cep: string;
     logradouro: string;
