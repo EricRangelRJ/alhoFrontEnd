@@ -1,3 +1,4 @@
+import { ClientePost } from './../models/cliente-post';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -19,10 +20,12 @@ export class ClientesService {
     return this.httpClient.get<Cliente[]>(this.endpoint);
   }
 
-  // // CADASTRAR
-  // cadastrar(cliente: Cliente): Observable<Cliente> {
-  //   return this.httpClient.post<Cliente>(this.endpoint, cliente);
-  // }
+  // CADASTRAR
+  cadastrar(cliente: ClientePost) {
+    console.log(cliente);
+
+    return this.httpClient.post<Cliente>(this.endpoint, cliente);
+  }
 
   // // BUSCAR ID
   // buscarId(idCliente: number) {

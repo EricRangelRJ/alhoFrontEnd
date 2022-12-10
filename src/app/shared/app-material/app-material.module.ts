@@ -15,6 +15,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 
 import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
@@ -37,7 +42,13 @@ import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-l
     MatTableModule,
     MatToolbarModule,
     MatDialogModule,
+    MatStepperModule,
+    MatDatepickerModule,
     MatListModule,
+    MatNativeDateModule,
+    
+
+
 
   ]
 })

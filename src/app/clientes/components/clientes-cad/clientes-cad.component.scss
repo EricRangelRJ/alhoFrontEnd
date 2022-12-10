@@ -1,0 +1,43 @@
+.container{
+  width: 90%;
+  margin:auto;
+  padding: 1rem 1rem 3rem 1rem ;
+  border-radius: .6rem;
+}
+
+.fullWidth{
+  width: 100%;
+}
+
+.halfWidth{
+  width: 100%;
+}
+
+.min-width {
+  width: 100%;
+  min-width: 100px;
+}
+
+h1{
+  text-align: center;
+}
+
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.example-stepper {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}

@@ -1,3 +1,4 @@
+import { CardFormComponent } from './../util/card-form/card-form.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     ClientesListComponent,
-    ClientesCadComponent
+    ClientesCadComponent,
+    CardFormComponent
   ],
   imports: [
     CommonModule,

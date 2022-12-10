@@ -1,4 +1,3 @@
-import { RelatoriosModule } from './relatorios/relatorios.module';
 import { httpInterceptorProviders } from './_interceptors/index';
 import { NgModule } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -16,11 +15,14 @@ import { PedidosModule } from './pedidos/pedidos.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { FornecedoresModule } from './fornecedores/fornecedores.module';
 import { VendedoresModule } from './vendedores/vendedores.module';
+import { RelatoriosModule } from './relatorios/relatorios.module';
+
 import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,11 +37,13 @@ import { TraducaoMatPaginatorIntl } from './shared/traducao-mat-paginator-intl';
     FornecedoresModule,
     VendedoresModule,
     UsuariosModule,
-    RelatoriosModule
-
+    RelatoriosModule,
     ],
-  providers: [{provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl},
-  httpInterceptorProviders],
+  providers: [
+    {provide: MatPaginatorIntl, useClass: TraducaoMatPaginatorIntl},
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
