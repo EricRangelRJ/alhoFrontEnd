@@ -1,127 +1,191 @@
 <app-card-form tituloFormulario="Cadastro de Clientes">
-    <!--Tag section que passa um nome de class e com isso é selecionada lá no card-crud-->
-    <section class="card-form-content">
+  <!--Tag section que passa um nome de class e com isso é selecionada lá no card-crud-->
+  <section class="card-form-content">
+  <mat-stepper [orientation]="(stepperOrientation | async)!" [linear]="isLinear" #stepper>
+    
+      <h1>Teste Exibicao</h1>
+      <!-- DADOS PRINCIPAIS -->
+      <mat-step [stepControl]="dados" #step1>
+        <ng-template matStepLabel>Dados Principais</ng-template>
+        <form [formGroup]="dados" class="min-width">
 
-        <!--
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Nome Completo:</mat-label>
+            <input matInput placeholder="Informe o nome e sobrenome..." formControlName="nome" required
+              maxlength="50" />
+            <mat-error *ngIf="dados.get('nome')?.invalid">{{
+              getErrorMessage("nome")
+              }}</mat-error>
+          </mat-form-field>
 
-    <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-    </button>
--->
-        <mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="firstFormGroup" errorMessage="Campo nome é obrigratório.">
-                <form [formGroup]="firstFormGroup">
-                    <ng-template matStepLabel>Dados Principais</ng-template>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Nome Completo</mat-label>
-                        <input [(ngModel)]="cliente.nome" name="nome" matInput placeholder=""
-                            formControlName="firstCtrl" required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>CPF:</mat-label>
-                        <input [(ngModel)]="cliente.cpf" name="cpf" matInput placeholder="" formControlName="firstCtrl"
-                            required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Data de Nascimento:</mat-label>
-                        <input [(ngModel)]="cliente.dataNascimento" name="dataNascimento" matInput placeholder=""
-                            formControlName="firstCtrl" required>
-                    </mat-form-field>
-                    <div>
-                        <button mat-button matStepperNext>Avançar</button>
-                    </div>
-                </form>
-            </mat-step>
-            <mat-step [stepControl]="secondFormGroup">
-                <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Endereço</ng-template>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Tipo Endereço:</mat-label>
-                        <input matInput formControlName="secondCtrl" placeholder="Rua, Avenida, Estrada, Beco..."
-                            required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Logradouro:</mat-label>
-                        <input [(ngModel)]="cliente.logradouro" name="clienteEnderecoLogradouro" matInput
-                            formControlName="secondCtrl" placeholder="Insira a descrição..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Número:</mat-label>
-                        <input [(ngModel)]="cliente.numero" name="clienteNumero" matInput
-                            formControlName="secondCtrl" placeholder="Numero da casa, prédio..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>CEP:</mat-label>
-                        <input [(ngModel)]="cliente.cep" name="clienteCep" matInput
-                            formControlName="secondCtrl" placeholder="Numero da casa, prédio..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Complemento:</mat-label>
-                        <input
-                        [(ngModel)]="cliente.complemento" name="clienteComplemento" matInput 
-                            formControlName="secondCtrl" placeholder="Bloco/Apto, fundos..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Nome do Condomínio:</mat-label>
-                        <input [(ngModel)]="cliente.condominio" name="clienteCondominio" matInput
-                            formControlName="secondCtrl" placeholder="Caso seja Condomínio informe o nome...">
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Observação ou Ponto de Referência:</mat-label>
-                        <input [(ngModel)]="cliente.observacao" name="clienteObservacao" matInput
-                            formControlName="secondCtrl"
-                            placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc...">
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Bairro:</mat-label>
-                        <input matInput matInput  [(ngModel)]="cliente.bairro" name="clienteBairro"
-                            formControlName="secondCtrl" placeholder="Insira o nome..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Cidade:</mat-label>
-                        <input matInput  [(ngModel)]="cliente.municipio" name="clienteMunicipio" 
-                            formControlName="secondCtrl" placeholder="Insira o nome..." required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Estado:</mat-label>
-                        <input [(ngModel)]="cliente.estado" name="clienteEstado" matInput
-                            formControlName="secondCtrl" placeholder="Insira o estado..." required>
-                    </mat-form-field>
-                    <div>
-                        <button mat-button matStepperPrevious>Voltar</button>
-                        <button mat-button matStepperNext>Avançar</button>
-                    </div>
-                </form>
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Contatos</ng-template>
-                <form [formGroup]="thirdFormGroup">
-                    <ng-template matStepLabel>Contatos</ng-template>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Telefone Principal:</mat-label>
-                        <input [(ngModel)]="cliente.telefone1" name="clienteTelefone1" matInput
-                            formControlName="thirdCtrl" placeholder="" required>
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Telefone Recado:</mat-label>
-                        <input [(ngModel)]="cliente.telefone2" name="clienteTelefone2" matInput
-                            formControlName="thirdCtrl" placeholder="Pai, Mãe, Vizinho.. etc">
-                    </mat-form-field>
-                    <mat-form-field class="fullWidth" appearance="fill">
-                        <mat-label>Email:</mat-label>
-                        <input [(ngModel)]="cliente.email" name="clienteEmail" matInput placeholder=""
-                            formControlName="thirdCtrl" required>
-                    </mat-form-field>
-                    <div>
-                        <button mat-button matStepperPrevious>Voltar</button>
-                        <button mat-button (click)="stepper.reset()">Limpar</button>
-                        <button mat-button (click)="create()">Cadastrar</button>
-                        <button mat-button routerLink="../" >Cancelar</button>
-                    </div>
-                </form>
-            </mat-step>
-        </mat-stepper>
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>CPF:</mat-label>
+            <input matInput placeholder="Informe o cpf..." type="text" formControlName="cpf" required maxlength="11" />
+            <mat-error *ngIf="dados.get('cpf')?.invalid">{{
+              getErrorMessage("cpf")
+              }}</mat-error>
+          </mat-form-field>
 
-    </section>
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput formControlName="dataNascimento" name="dataNascimento" [matDatepicker]="picker" 
+              maxlength="10">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker touchUi disabled="false"> </mat-datepicker>
+          </mat-form-field>
+
+          <br>
+          <mat-card-actions>
+            <button mat-button (click)="step1.reset()">Limpar</button>
+            <button [disabled]="!dados.valid" mat-button matStepperNext>Avançar</button>
+          </mat-card-actions>
+        </form>
+      </mat-step>
+
+      <!-- CONTATOS -->
+      <mat-step [stepControl]="contatos">
+        <ng-template matStepLabel>Contatos</ng-template>
+        <form [formGroup]="contatos">
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Telefone Principal:</mat-label>
+            <input matInput type="tel" formControlName="telefone1" placeholder="Informe um telefone..." required
+              maxlength="11" />
+            <mat-error *ngIf="contatos.get('telefone1')?.invalid">{{
+              getErrorMessage("telefone1")
+              }}</mat-error>
+          </mat-form-field>
+          <small> Formato: xxxxxxxxxxx</small>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Telefone Recado:</mat-label>
+            <input matInput type="tel" formControlName="telefone2" placeholder="Telefone de Pai, Mãe, Vizinho.. etc"
+              maxlength="11" />
+            <mat-error *ngIf="contatos.get('telefone2')?.invalid">{{
+              getErrorMessage("telefone2")
+              }}</mat-error>
+          </mat-form-field>
+          <small> Formato: xxxxxxxxxxx</small>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Email:</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Informe o email..." maxlength="30" />
+            <mat-error *ngIf="contatos.get('email')?.invalid">{{
+              getErrorMessage("email")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-card-actions>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button [disabled]="!contatos.valid" mat-button matStepperNext>Avançar</button>
+          </mat-card-actions>
+        </form>
+      </mat-step>
+
+      <!-- ENDEREÇO -->
+      <mat-step [stepControl]="endereco" [optional]="opcional">
+        <ng-template matStepLabel>Endereço</ng-template>
+        <form [formGroup]="endereco">
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Logradouro:</mat-label>
+            <input matInput type="text" formControlName="logradouro" placeholder="Insira nome da rua, avenida, etc..."
+              maxlength="50">
+            <mat-error *ngIf="endereco.get('logradouro')?.invalid">{{
+              getErrorMessage("logradouro")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Número:</mat-label>
+            <input matInput type="text" formControlName="numero" placeholder="Numero da casa, prédio..." maxlength="5">
+            <mat-error *ngIf="endereco.get('numero')?.invalid">{{
+              getErrorMessage("numero")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>CEP:</mat-label>
+            <input matInput type="text" formControlName="cep" placeholder="Cep local..." maxlength="8">
+            <mat-error *ngIf="endereco.get('cep')?.invalid">{{
+              getErrorMessage("cep")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Complemento:</mat-label>
+            <input matInput type="text" formControlName="complemento" placeholder="Bloco/Apto, fundos...">
+            <mat-error *ngIf="endereco.get('complemento')?.invalid">{{
+              getErrorMessage("complemento")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Nome do Condomínio:</mat-label>
+            <input matInput type="text" formControlName="condominio"
+              placeholder="Caso seja Condomínio informe o nome...">
+            <mat-error *ngIf="endereco.get('condominio')?.invalid">{{
+              getErrorMessage("condominio")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Bairro:</mat-label>
+            <input matInput type="text" formControlName="bairro" placeholder="Insira o bairro..." />
+            <mat-error *ngIf="endereco.get('bairro')?.invalid">{{
+              getErrorMessage("bairro")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Município:</mat-label>
+            <input matInput type="text" formControlName="municipio" placeholder="Insira o município..."
+              maxlength="60" />
+            <mat-error *ngIf="endereco.get('municipio')?.invalid">{{
+              getErrorMessage("municipio")
+              }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Estado(UF):</mat-label>
+            <mat-select formControlName="estado">
+              <mat-option value="">Selecione os Estados</mat-option>
+              <mat-option *ngFor="let estado of estados" [value]="estado.nome">
+                {{ estado.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-card-actions>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button [disabled]="!endereco.valid" mat-button matStepperNext>Avançar</button>
+          </mat-card-actions>
+        </form>
+      </mat-step>
+
+      <!-- OBSERVAÇÃO -->
+      <mat-step [stepControl]="observacoes" [optional]="opcional">
+        <ng-template matStepLabel>Observações</ng-template>
+        <form [formGroup]="observacoes">
+
+          <mat-form-field class="halfWidth" appearance="outline">
+            <mat-label>Observação ou Ponto de Referência:</mat-label>
+            <textarea matInput formControlName="observacao"
+              placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc..." cdkTextareaAutosize
+              [cdkAutosizeMinRows]="3" [cdkAutosizeMinRows]="5" maxlength="300">
+        </textarea>
+          </mat-form-field>
+
+          <mat-card-actions>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <!-- <button mat-button (click)="stepper.reset()">Limpar formulário</button> -->
+            <button mat-raised-button color="primary" (click)="create()">Cadastrar</button>
+          </mat-card-actions>
+        </form>
+      </mat-step>
+
+    </mat-stepper>
+
+  </section>
 
 </app-card-form>

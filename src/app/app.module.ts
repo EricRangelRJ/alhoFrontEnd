@@ -20,7 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { NewBtnComponent } from './components/util/new-btn/new-btn.component';
 import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { ClienteSearchComponent } from './components/clientes/cliente-search/cliente-search.component';
 import { CardSearchComponent } from './components/util/card-search/card-search.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -88,8 +90,13 @@ import { CardSearchComponent } from './components/util/card-search/card-search.c
     MatInputModule,
     HttpClientModule,
     MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [AuthInterceptorProvider],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthInterceptorProvider,
+    MatDatepickerModule
+  ],
+   bootstrap: [AppComponent]
 })
 export class AppModule { }
