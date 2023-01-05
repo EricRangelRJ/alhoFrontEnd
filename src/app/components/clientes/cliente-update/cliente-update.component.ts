@@ -127,9 +127,11 @@ export class ClienteUpdateComponent implements OnInit {
 
   update(): void {
     this.cliente = this.convertDTO(this.clienteUpdate);
+    console.log(this.clienteUpdate);
+    console.log(this.cliente);
     this.service.update(this.cliente).subscribe(
       () => {
-        console.log(this.cliente);
+        //console.log(this.cliente);
         console.log("entrouu antes");
         this.alertService.success('Cliente atualizado com sucesso', 'Update');
         this.router.navigate(['clientes']);

@@ -1,97 +1,93 @@
 <div class="container">
 
   <!--Inicia chamando o componente card-listar e passa os parâmetros necessários-->
-  <app-card-listar 
-  tituloFormulario="Controle de Clientes"
-  rotaBotaoIncluir="clientes/create"
-  
-  >
-    
-      <!--Tag section que passa um nome de class e com isso é selecionada lá no card-listar-->
-      <section class="card-listar-content">
+  <app-card-listar tituloFormulario="Controle de Clientes" rotaBotaoIncluir="clientes/create">
 
-        <mat-form-field>
-          <mat-label>Filtrar</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Informe qualquer trecho dos dados da tabela..." #input>
-        </mat-form-field>
-    
-        <mat-table id="mat-table" [dataSource]="dataSource"  >
-    
-          <!-- Position Column -->
-          <ng-container matColumnDef="idCliente">
-            <mat-header-cell *matHeaderCellDef>
-              <p><span>Código"</span></p> </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.idCliente}}</mat-cell>
-          </ng-container>
-    
-          <!-- Name Column -->
-          <ng-container matColumnDef="nome">
-            <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.nome}} </mat-cell>
-          </ng-container>
-    
-          <!-- Weight Column -->
-          <ng-container matColumnDef="cpf">
-            <mat-header-cell *matHeaderCellDef> Cpf </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.cpf}} </mat-cell>
-          </ng-container>
-    
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="dataNascimento">
-            <mat-header-cell *matHeaderCellDef> Data Nascimento </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.dataNascimento | date: 'dd/MM/yyyy'}} </mat-cell>
-          </ng-container>
-    
-    
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="telefone1">
-            <mat-header-cell *matHeaderCellDef> Telefone1 </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.telefone1}} </mat-cell>
-          </ng-container>
-    
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="telefone2">
-            <mat-header-cell *matHeaderCellDef> Telefone2 </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.telefone2}} </mat-cell>
-          </ng-container>
-    
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.email}} </mat-cell>
-          </ng-container>
-    
-    
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="observacao">
-            <mat-header-cell *matHeaderCellDef> Observação </mat-header-cell>
-            <mat-cell *matCellDef="let coluna"> {{coluna.observacao}} </mat-cell>
-          </ng-container>
-    
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let coluna">
-              <button mat-button routerLink="search/{{coluna.idCliente}}" class="search">
-                <i class="material-icons">search</i>
-              </button>
-              <button  mat-button routerLink="update/{{coluna.idCliente}}" class="edit">
-                <i class="material-icons">edit</i>
-              </button>
-              <button mat-button (click)="delete(coluna.idCliente)" class="delete">
-                <i class="material-icons">delete</i>
-              </button>
-            </mat-cell>
-          </ng-container>
-       
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+    <!--Tag section que passa um nome de class e com isso é selecionada lá no card-listar-->
+    <section class="card-listar-content">
 
-    
-      </section>
-    
-      </app-card-listar>
-    
+      <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Informe qualquer trecho dos dados da tabela..."
+          #input>
+      </mat-form-field>
+
+      <mat-table id="mat-table" [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="idCliente">
+          <mat-header-cell *matHeaderCellDef>
+            <p><span>Código"</span></p>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.idCliente}}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.nome}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="cpf">
+          <mat-header-cell *matHeaderCellDef> Cpf </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.cpf}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="dataNascimento">
+          <mat-header-cell *matHeaderCellDef> Data Nascimento </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.dataNascimento | date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
 
 
-  </div>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="telefone1">
+          <mat-header-cell *matHeaderCellDef> Telefone1 </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.telefone1}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="telefone2">
+          <mat-header-cell *matHeaderCellDef> Telefone2 </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.telefone2}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.email}} </mat-cell>
+        </ng-container>
+
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="observacao">
+          <mat-header-cell *matHeaderCellDef> Observação </mat-header-cell>
+          <mat-cell *matCellDef="let coluna"> {{coluna.observacao}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let coluna">
+            <button mat-button routerLink="search/{{coluna.idCliente}}" class="search">
+              <i class="material-icons">search</i>
+            </button>
+            <button mat-button routerLink="update/{{coluna.idCliente}}" class="edit">
+              <i class="material-icons">edit</i>
+            </button>
+            <button mat-button (click)="delete(coluna.idCliente)" class="delete">
+              <i class="material-icons">delete</i>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </section>
+
+  </app-card-listar>
+
+</div>

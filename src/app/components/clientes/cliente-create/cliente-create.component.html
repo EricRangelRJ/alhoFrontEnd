@@ -11,7 +11,9 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Nome Completo:</mat-label>
-            <input matInput placeholder="Informe o nome e sobrenome..." formControlName="nome" required
+            <input matInput
+            [(ngModel)]="cliente.nome" name="nome"
+             placeholder="Informe o nome e sobrenome..." formControlName="nome" required
               maxlength="50" />
             <mat-error *ngIf="dados.get('nome')?.invalid">{{
               getErrorMessage("nome")
@@ -20,7 +22,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>CPF:</mat-label>
-            <input matInput placeholder="Informe o cpf..." type="text" formControlName="cpf" required maxlength="11" />
+            <input [(ngModel)]="cliente.cpf" name="nome" matInput placeholder="Informe o cpf..." type="text" formControlName="cpf" required maxlength="11" />
             <mat-error *ngIf="dados.get('cpf')?.invalid">{{
               getErrorMessage("cpf")
               }}</mat-error>
@@ -28,7 +30,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Data de Nascimento</mat-label>
-            <input matInput formControlName="dataNascimento" name="dataNascimento" [matDatepicker]="picker" 
+            <input [(ngModel)]="cliente.dataNascimento" name="nome" matInput formControlName="dataNascimento" name="dataNascimento" [matDatepicker]="picker" 
               maxlength="10">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker touchUi disabled="false"> </mat-datepicker>
@@ -49,7 +51,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Telefone Principal:</mat-label>
-            <input matInput type="tel" formControlName="telefone1" placeholder="Informe um telefone..." required
+            <input [(ngModel)]="cliente.telefone1"  matInput type="tel" formControlName="telefone1" placeholder="Informe um telefone..." required
               maxlength="11" />
             <mat-error *ngIf="contatos.get('telefone1')?.invalid">{{
               getErrorMessage("telefone1")
@@ -59,7 +61,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Telefone Recado:</mat-label>
-            <input matInput type="tel" formControlName="telefone2" placeholder="Telefone de Pai, Mãe, Vizinho.. etc"
+            <input [(ngModel)]="cliente.telefone2" matInput type="tel" formControlName="telefone2" placeholder="Telefone de Pai, Mãe, Vizinho.. etc"
               maxlength="11" />
             <mat-error *ngIf="contatos.get('telefone2')?.invalid">{{
               getErrorMessage("telefone2")
@@ -69,7 +71,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Email:</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="Informe o email..." maxlength="30" />
+            <input [(ngModel)]="cliente.email" matInput type="email" formControlName="email" placeholder="Informe o email..." maxlength="30" />
             <mat-error *ngIf="contatos.get('email')?.invalid">{{
               getErrorMessage("email")
               }}</mat-error>
@@ -89,7 +91,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Logradouro:</mat-label>
-            <input matInput type="text" formControlName="logradouro" placeholder="Insira nome da rua, avenida, etc..."
+            <input [(ngModel)]="cliente.logradouro" matInput type="text" formControlName="logradouro" placeholder="Insira nome da rua, avenida, etc..."
               maxlength="50">
             <mat-error *ngIf="endereco.get('logradouro')?.invalid">{{
               getErrorMessage("logradouro")
@@ -98,7 +100,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Número:</mat-label>
-            <input matInput type="text" formControlName="numero" placeholder="Numero da casa, prédio..." maxlength="5">
+            <input [(ngModel)]="cliente.numero" matInput type="text" formControlName="numero" placeholder="Numero da casa, prédio..." maxlength="5">
             <mat-error *ngIf="endereco.get('numero')?.invalid">{{
               getErrorMessage("numero")
               }}</mat-error>
@@ -106,7 +108,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>CEP:</mat-label>
-            <input matInput type="text" formControlName="cep" placeholder="Cep local..." maxlength="8">
+            <input matInput [(ngModel)]="cliente.cep" type="text" formControlName="cep" placeholder="Cep local..." maxlength="8">
             <mat-error *ngIf="endereco.get('cep')?.invalid">{{
               getErrorMessage("cep")
               }}</mat-error>
@@ -114,7 +116,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Complemento:</mat-label>
-            <input matInput type="text" formControlName="complemento" placeholder="Bloco/Apto, fundos...">
+            <input [(ngModel)]="cliente.complemento" matInput type="text" formControlName="complemento" placeholder="Bloco/Apto, fundos...">
             <mat-error *ngIf="endereco.get('complemento')?.invalid">{{
               getErrorMessage("complemento")
               }}</mat-error>
@@ -122,7 +124,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Nome do Condomínio:</mat-label>
-            <input matInput type="text" formControlName="condominio"
+            <input [(ngModel)]="cliente.condominio" matInput type="text" formControlName="condominio"
               placeholder="Caso seja Condomínio informe o nome...">
             <mat-error *ngIf="endereco.get('condominio')?.invalid">{{
               getErrorMessage("condominio")
@@ -131,7 +133,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Bairro:</mat-label>
-            <input matInput type="text" formControlName="bairro" placeholder="Insira o bairro..." />
+            <input [(ngModel)]="cliente.bairro" matInput type="text" formControlName="bairro" placeholder="Insira o bairro..." />
             <mat-error *ngIf="endereco.get('bairro')?.invalid">{{
               getErrorMessage("bairro")
               }}</mat-error>
@@ -139,7 +141,7 @@
 
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Município:</mat-label>
-            <input matInput type="text" formControlName="municipio" placeholder="Insira o município..."
+            <input [(ngModel)]="cliente.municipio" matInput type="text" formControlName="municipio" placeholder="Insira o município..."
               maxlength="60" />
             <mat-error *ngIf="endereco.get('municipio')?.invalid">{{
               getErrorMessage("municipio")
@@ -150,7 +152,7 @@
             <mat-label>Estado(UF):</mat-label>
             <mat-select formControlName="estado">
               <mat-option value="">Selecione os Estados</mat-option>
-              <mat-option *ngFor="let estado of estados" [value]="estado.nome">
+              <mat-option [(ngModel)]="cliente.estado" *ngFor="let estado of estados" [value]="estado.nome">
                 {{ estado.nome }}
               </mat-option>
             </mat-select>
@@ -170,7 +172,7 @@
 
           <mat-form-field class="halfWidth" appearance="outline">
             <mat-label>Observação ou Ponto de Referência:</mat-label>
-            <textarea matInput formControlName="observacao"
+            <textarea [(ngModel)]="cliente.observacao" matInput formControlName="observacao"
               placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc..." cdkTextareaAutosize
               [cdkAutosizeMinRows]="3" [cdkAutosizeMinRows]="5" maxlength="300">
         </textarea>
