@@ -6,6 +6,7 @@ import { StepperOrientation } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { ClienteRequestDTO } from 'src/app/dto/cliente/clienteRequestDTO';
+import { ClientePost } from 'src/app/models/cliente/clientePostDTO';
 import { Estados } from 'src/app/models/estados';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -23,74 +24,42 @@ export class ClienteCreateComponent implements OnInit {
   stepperOrientation: Observable<StepperOrientation>;
   estados: Estados[];
   picker: any;
+  clientePost: ClientePost = new ClientePost;
 
-  //Objeto sendo inicializado para receber os parâmetros do form no HTML
-  cliente: ClienteRequestDTO = {
-    idCliente: null,
-    nome: '',
-    cpf: '',
-    dataNascimento: '',
-    telefone1: '',
-    telefone2: '',
-    email: '',
-    numero: '',
-    complemento: '',
-    condominio: '',
-    bairro: '',
-    municipio: '',
-    estado: '',
-    cep: '',
-    logradouro: '',
-    observacao: '',
-  }
 
-  dados = this._formBuilder.group({
+  abaDadosPrincipais = this._formBuilder.group({
     nome: ['',
       //torna o campo obrigatório
-      [Validators.required,
+      [//Validators.required,
       //Regex para duas strings, separadas com espaço e com no mínimo 3 caracteres cada. Aceita acentuação e rejeita números.
-      Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/),
+      //Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/),
       ]
     ],
-    cpf: ['',
-      [Validators.required,
-      Validators.pattern('^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$')
-      ]
-    ],
-    dataNascimento: ['',[]], /*IMPORTANTE: NECESSÁRIO VALIDAR A DATA  */
+    cpf: [''],
+      //[Validators.required,
+       //Validators.pattern('^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$')
+    dataNascimento: [''], 
+    email:[''],
+      
   });
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private service: ClienteService,
-    private estadoService: EstadosService,
-    private alertService: AlertService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver,
-  ) {
-    this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 868px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-  }
+  abaObservacoes  = this._formBuilder.group({
+    observacao: [''],
+  });
 
-  ngOnInit(): void {
-    this.buscarEstados();
-  }
-
-  contatos  = this._formBuilder.group({
+  abaContatos  = this._formBuilder.group({
     telefone1: ['',
-      [Validators.required,
-      Validators.pattern (/^[0-9]{8,11}$/)
+      //[Validators.required,
+      //Validators.pattern (/^[0-9]{8,11}$/)
      // Validators.pattern (/^\(?\d{2}\)?[\s-]?\d{5}-?\d{4}$/),
 
-      ]
+      //]
     ],
-    telefone2: ['', [Validators.pattern (/^[0-9]{8,11}$/)]],
-    email: ['',
-      [Validators.email,
-        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,3})+$/)]
-    ],
+    telefone2: [''], // [Validators.pattern (/^[0-9]{8,11}$/)]],
+    email: [''],
+      //[Validators.email,
+      //  Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,3})+$/)]
+    //],
   });
 
   endereco  = this._formBuilder.group({
@@ -105,17 +74,14 @@ export class ClienteCreateComponent implements OnInit {
   ],
   });
 
-  observacoes  = this._formBuilder.group({
-    observacao: [''],
-  });
 
   getErrorMessage(fieldName: string) {
     console.log(fieldName);
 
-    const dados = this.dados.get(fieldName);
-    const contatos = this.contatos.get(fieldName);
+    const dados = this.abaDadosPrincipais.get(fieldName);
+    const contatos = this.abaContatos.get(fieldName);
     const endereco = this.endereco.get(fieldName);
-    const observacoes = this.observacoes.get(fieldName);
+    const observacoes = this.abaObservacoes.get(fieldName);
 
     if (dados?.hasError('required') || contatos?.hasError('required')) {
       return 'Campo obrigatório';
@@ -156,6 +122,39 @@ export class ClienteCreateComponent implements OnInit {
     return 'Campo Inválido';
   }
 
+  constructor(
+    private _formBuilder: FormBuilder,
+    private service: ClienteService,
+    private estadoService: EstadosService,
+    private alertService: AlertService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver,
+  ) {
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 868px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
+
+  ngOnInit(): void {
+    this.buscarEstados();
+  }
+
+  
+
+  formPost(
+    abaDadosPrincipais: Partial<{ nome: string; cpf: string; dataNascimento: string; observacao:string; email:string; }>,
+    abaObservacoes: Partial<{ observacao: string}>,
+    abaContatos: Partial<{ email: string}>,
+        
+    ) {
+    this.clientePost.nome = abaDadosPrincipais.nome;
+    this.clientePost.cpf = abaDadosPrincipais.cpf;
+    this.clientePost.observacao = abaObservacoes.observacao;
+    this.clientePost.dataNascimento = abaDadosPrincipais.dataNascimento;
+    this.clientePost.email = abaContatos.email;
+  }
+
   buscarEstados(): void {
     this.estadoService.buscarEstados().subscribe({
       next: result => {
@@ -168,10 +167,11 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   create(): void {
-    console.log(this.cliente)
-    this.service.create(this.cliente).subscribe(
+    this.formPost(this.abaDadosPrincipais.value, this.abaObservacoes.value, this.abaContatos.value);
+    console.log(this.clientePost);
+    this.service.create(this.clientePost).subscribe(
       () => {
-        console.log(this.cliente);
+        console.log(this.clientePost);
         this.alertService.success('Cliente cadastrado com sucesso');
         this.router.navigate(['clientes']);
       },

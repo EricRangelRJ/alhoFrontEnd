@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuarioComponent},
       { path: 'pedidos',  component: PedidoComponent},
       { path: 'fornecedores',  component: FornecedoresComponent},
-      { path: 'fornecedores/create', component: FornecedoresCreateComponent},
+      { path: 'fornecedores/create', component: FornecedoresCreateComponent}
     ]
   },
 ];
