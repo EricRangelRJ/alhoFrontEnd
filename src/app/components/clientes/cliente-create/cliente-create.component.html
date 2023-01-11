@@ -83,11 +83,28 @@
       </mat-step>
 
       <!-- ENDEREÇO -->
-      <mat-step [stepControl]="endereco" [optional]="opcional">
+      <mat-step [stepControl]="abaEnderecos" [optional]="opcional">
         <ng-template matStepLabel>Endereço</ng-template>
         
         
-        <form [formGroup]="endereco">
+        <form [formGroup]="abaEnderecos">
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Tipo Logradouro:</mat-label>
+            <mat-select formControlName="tipoLogradouro">
+                <mat-option value="">Selecione o tipo de logradouro</mat-option>
+                <mat-option *ngFor="let tl of tiposLogradouros" value ="{{tl.idTipoLogradouro}}">{{ tl.descricao }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Tipo Endereço:</mat-label>
+            <mat-select formControlName="tipoEndereco">
+                <mat-option value="">Selecione o tipo de Endereço</mat-option>
+                <mat-option *ngFor="let te of tiposEnderecos" value ="{{te.idTipoEndereco}}">{{ te.descricao }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <!--
 
           <mat-form-field class="fullWidth" appearance="fill">
@@ -162,7 +179,7 @@
         -->
           <mat-card-actions>
             <button mat-button matStepperPrevious>Voltar</button>
-            <button [disabled]="!endereco.valid" mat-button matStepperNext>Avançar</button>
+            <button [disabled]="!abaEnderecos.valid" mat-button matStepperNext>Avançar</button>
           </mat-card-actions>
         </form>
       </mat-step>

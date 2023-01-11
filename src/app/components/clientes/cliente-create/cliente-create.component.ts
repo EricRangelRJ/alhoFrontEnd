@@ -8,9 +8,13 @@ import { map, Observable } from 'rxjs';
 import { ClienteRequestDTO } from 'src/app/dto/cliente/clienteRequestDTO';
 import { ClientePost } from 'src/app/models/cliente/clientePostDTO';
 import { Estados } from 'src/app/models/estados';
+import { TipoEndereco } from 'src/app/models/tipoEndereco/tipoEndereco';
+import { TipoLogradouro } from 'src/app/models/tipoLogradouro/tipoLogradouro';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { EstadosService } from 'src/app/services/estados.service';
+import { TipoEnderecoService } from 'src/app/services/tipo-endereco.service';
+import { TipoLogradouroService } from 'src/app/services/tipo-logradouro.service';
 
 @Component({
   selector: 'app-cliente-create',
@@ -24,9 +28,9 @@ export class ClienteCreateComponent implements OnInit {
   stepperOrientation: Observable<StepperOrientation>;
   estados: Estados[];
   picker: any;
-  clientePost: ClientePost = new ClientePost;
-
-
+  cliente: ClientePost = new ClientePost;
+  tiposEnderecos: TipoEndereco[] = []
+  tiposLogradouros: TipoLogradouro[] = []
   abaDadosPrincipais = this._formBuilder.group({
     nome: ['',
       //torna o campo obrigatório
@@ -39,7 +43,7 @@ export class ClienteCreateComponent implements OnInit {
       //[Validators.required,
        //Validators.pattern('^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$')
     dataNascimento: [''], 
-    email:[''],
+    
       
   });
 
@@ -48,30 +52,21 @@ export class ClienteCreateComponent implements OnInit {
   });
 
   abaContatos  = this._formBuilder.group({
-    telefone1: ['',
-      //[Validators.required,
-      //Validators.pattern (/^[0-9]{8,11}$/)
-     // Validators.pattern (/^\(?\d{2}\)?[\s-]?\d{5}-?\d{4}$/),
-
-      //]
-    ],
-    telefone2: [''], // [Validators.pattern (/^[0-9]{8,11}$/)]],
-    email: [''],
-      //[Validators.email,
-      //  Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3,3})+$/)]
-    //],
+    email:['']
   });
 
-  endereco  = this._formBuilder.group({
-    logradouro: ['', [Validators.pattern(/^([a-zA-Z]{0,1}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    numero: ['', [Validators.pattern('^[0-9]{1,6}')]],
-    complemento: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    condominio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    bairro: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    municipio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    estado: [''],
-    cep: ['', [Validators.pattern(/^(\d{5}|\d{5}\-?\d{3})$/)] // aceita traço
-  ],
+  abaEnderecos  = this._formBuilder.group({
+    tipoLogradouro: [''],
+    tipoEndereco:['']
+    //logradouro: ['', [Validators.pattern(/^([a-zA-Z]{0,1}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    //numero: ['', [Validators.pattern('^[0-9]{1,6}')]],
+    //complemento: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    //condominio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    //bairro: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    //municipio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    //estado: [''],
+    //cep: ['', [Validators.pattern(/^(\d{5}|\d{5}\-?\d{3})$/)] // aceita traço
+  //],
   });
 
 
@@ -80,7 +75,7 @@ export class ClienteCreateComponent implements OnInit {
 
     const dados = this.abaDadosPrincipais.get(fieldName);
     const contatos = this.abaContatos.get(fieldName);
-    const endereco = this.endereco.get(fieldName);
+    const endereco = this.abaEnderecos.get(fieldName);
     const observacoes = this.abaObservacoes.get(fieldName);
 
     if (dados?.hasError('required') || contatos?.hasError('required')) {
@@ -126,6 +121,8 @@ export class ClienteCreateComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private service: ClienteService,
     private estadoService: EstadosService,
+    private tipoEnderecoService: TipoEnderecoService,
+    private tipoLogradouroService: TipoLogradouroService,
     private alertService: AlertService,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -138,21 +135,23 @@ export class ClienteCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarEstados();
+    this.buscarTipoEndereco();
+    this.buscarTipoLogradouro();
   }
 
-  
-
   formPost(
-    abaDadosPrincipais: Partial<{ nome: string; cpf: string; dataNascimento: string; observacao:string; email:string; }>,
+    abaDadosPrincipais: Partial<{ nome: string; cpf: string; dataNascimento: string; observacao:string; email:string}>,
     abaObservacoes: Partial<{ observacao: string}>,
     abaContatos: Partial<{ email: string}>,
-        
+    abaEnderecos: Partial<{ tipoEndereco: string; tipoLogradouro: string}>
     ) {
-    this.clientePost.nome = abaDadosPrincipais.nome;
-    this.clientePost.cpf = abaDadosPrincipais.cpf;
-    this.clientePost.observacao = abaObservacoes.observacao;
-    this.clientePost.dataNascimento = abaDadosPrincipais.dataNascimento;
-    this.clientePost.email = abaContatos.email;
+    this.cliente.nome = abaDadosPrincipais.nome;
+    this.cliente.cpf = abaDadosPrincipais.cpf;
+    this.cliente.observacao = abaObservacoes.observacao;
+    this.cliente.dataNascimento = abaDadosPrincipais.dataNascimento;
+    this.cliente.email = abaContatos.email;
+    this.cliente.endereco.tipoEndereco.idTipoEndereco = abaEnderecos.tipoEndereco;
+    this.cliente.endereco.tipoLogradouro.idTipoLogradouro = abaEnderecos.tipoLogradouro;
   }
 
   buscarEstados(): void {
@@ -166,12 +165,25 @@ export class ClienteCreateComponent implements OnInit {
     })
   }
 
+  buscarTipoLogradouro(): void {
+    this.tipoLogradouroService.findAll().subscribe(resposta => {
+      this.tiposLogradouros = resposta;
+    })
+
+  }
+
+  buscarTipoEndereco(){
+    this.tipoEnderecoService.findAll().subscribe(resposta => {
+      this.tiposEnderecos = resposta;
+  })
+}
+
   create(): void {
-    this.formPost(this.abaDadosPrincipais.value, this.abaObservacoes.value, this.abaContatos.value);
-    console.log(this.clientePost);
-    this.service.create(this.clientePost).subscribe(
+    this.formPost(this.abaDadosPrincipais.value, this.abaObservacoes.value, this.abaContatos.value, this.abaEnderecos.value);
+    console.log(this.cliente);
+    this.service.create(this.cliente).subscribe(
       () => {
-        console.log(this.clientePost);
+        console.log(this.cliente);
         this.alertService.success('Cliente cadastrado com sucesso');
         this.router.navigate(['clientes']);
       },
