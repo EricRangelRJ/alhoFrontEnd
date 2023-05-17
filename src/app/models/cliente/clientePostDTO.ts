@@ -6,7 +6,5 @@ export class ClientePost {
     dataNascimento: string;
     email: string;
     observacao: string;
-    endereco: Endereco;
-    
-    
+    endereco: Endereco = new Endereco();
 }

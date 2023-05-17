@@ -57,16 +57,16 @@ export class ClienteCreateComponent implements OnInit {
 
   abaEnderecos  = this._formBuilder.group({
     tipoLogradouro: [''],
-    tipoEndereco:['']
-    //logradouro: ['', [Validators.pattern(/^([a-zA-Z]{0,1}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    //numero: ['', [Validators.pattern('^[0-9]{1,6}')]],
-    //complemento: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    //condominio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    //bairro: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    //municipio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
-    //estado: [''],
-    //cep: ['', [Validators.pattern(/^(\d{5}|\d{5}\-?\d{3})$/)] // aceita traço
-  //],
+    tipoEndereco:[''],
+    logradouro: ['', [Validators.pattern(/^([a-zA-Z]{0,1}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    numero: ['', [Validators.pattern('^[0-9]{1,6}')]],
+    complemento: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    cep: ['', [Validators.pattern(/^(\d{5}|\d{5}\-?\d{3})$/)]], // aceita traço
+    condominio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    bairro: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    municipio: ['', [Validators.pattern(/^([a-zA-Z]{1,}[a-zA-Z]{1,}'?-?[a-zA-Z]\s?([a-zA-Z]{1,})?)/)]],
+    estado: [''],
+    isEnderecoDeEntrega:['1']
   });
 
 
@@ -143,7 +143,19 @@ export class ClienteCreateComponent implements OnInit {
     abaDadosPrincipais: Partial<{ nome: string; cpf: string; dataNascimento: string; observacao:string; email:string}>,
     abaObservacoes: Partial<{ observacao: string}>,
     abaContatos: Partial<{ email: string}>,
-    abaEnderecos: Partial<{ tipoEndereco: string; tipoLogradouro: string}>
+    abaEnderecos: Partial<{
+      tipoEndereco: string;
+      tipoLogradouro: string;
+      logradouro: string;
+      numero: string;
+      cep: string;
+      complemento: string;
+      bairro: string;
+      municipio: string;
+      estado: string;
+      condominio: string
+      isEnderecoDeEntrega: string;
+    }>
     ) {
     this.cliente.nome = abaDadosPrincipais.nome;
     this.cliente.cpf = abaDadosPrincipais.cpf;
@@ -152,6 +164,15 @@ export class ClienteCreateComponent implements OnInit {
     this.cliente.email = abaContatos.email;
     this.cliente.endereco.tipoEndereco.idTipoEndereco = abaEnderecos.tipoEndereco;
     this.cliente.endereco.tipoLogradouro.idTipoLogradouro = abaEnderecos.tipoLogradouro;
+    this.cliente.endereco.logradouro = abaEnderecos.logradouro;
+    this.cliente.endereco.numero = abaEnderecos.numero;
+    this.cliente.endereco.cep = abaEnderecos.cep;
+    this.cliente.endereco.complemento = abaEnderecos.complemento;
+    this.cliente.endereco.bairro = abaEnderecos.bairro;
+    this.cliente.endereco.municipio = abaEnderecos.municipio;
+    this.cliente.endereco.estado = abaEnderecos.estado;
+    this.cliente.endereco.condominio = abaEnderecos.condominio;
+    this.cliente.endereco.isEnderecoDeEntrega = abaEnderecos.isEnderecoDeEntrega;
   }
 
   buscarEstados(): void {
@@ -181,6 +202,7 @@ export class ClienteCreateComponent implements OnInit {
   create(): void {
     this.formPost(this.abaDadosPrincipais.value, this.abaObservacoes.value, this.abaContatos.value, this.abaEnderecos.value);
     console.log(this.cliente);
+    console.log("Entrou.....");
     this.service.create(this.cliente).subscribe(
       () => {
         console.log(this.cliente);

@@ -104,106 +104,83 @@
                 <mat-option *ngFor="let te of tiposEnderecos" value ="{{te.idTipoEndereco}}">{{ te.descricao }}</mat-option>
             </mat-select>
           </mat-form-field>
-
-          <!--
-
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Logradouro:</mat-label>
-            <input [(ngModel)]="cliente.logradouro" matInput type="text" formControlName="logradouro" placeholder="Insira nome da rua, avenida, etc..."
-              maxlength="50">
-            <mat-error *ngIf="endereco.get('logradouro')?.invalid">{{
-              getErrorMessage("logradouro")
-              }}</mat-error>
+            <input [(ngModel)]="cliente.endereco.logradouro" matInput type="text" formControlName="logradouro" placeholder="Insira nome da rua, avenida, etc..."
+            maxlength="50">
           </mat-form-field>
-
+          
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Número:</mat-label>
-            <input [(ngModel)]="cliente.numero" matInput type="text" formControlName="numero" placeholder="Numero da casa, prédio..." maxlength="5">
-            <mat-error *ngIf="endereco.get('numero')?.invalid">{{
-              getErrorMessage("numero")
-              }}</mat-error>
+            <input [(ngModel)]="cliente.endereco.numero" matInput type="text" formControlName="numero" placeholder="Numero da casa, prédio..." maxlength="5">
           </mat-form-field>
-
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>CEP:</mat-label>
-            <input matInput [(ngModel)]="cliente.cep" type="text" formControlName="cep" placeholder="Cep local..." maxlength="8">
-            <mat-error *ngIf="endereco.get('cep')?.invalid">{{
-              getErrorMessage("cep")
-              }}</mat-error>
+            <input matInput [(ngModel)]="cliente.endereco.cep" type="text" formControlName="cep" placeholder="Cep local..." maxlength="8">
           </mat-form-field>
-
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Complemento:</mat-label>
-            <input [(ngModel)]="cliente.complemento" matInput type="text" formControlName="complemento" placeholder="Bloco/Apto, fundos...">
-            <mat-error *ngIf="endereco.get('complemento')?.invalid">{{
-              getErrorMessage("complemento")
-              }}</mat-error>
+            <input [(ngModel)]="cliente.endereco.complemento" matInput type="text" formControlName="complemento" placeholder="Bloco/Apto, fundos...">
           </mat-form-field>
-
-          <mat-form-field class="fullWidth" appearance="fill">
-            <mat-label>Nome do Condomínio:</mat-label>
-            <input [(ngModel)]="cliente.condominio" matInput type="text" formControlName="condominio"
-              placeholder="Caso seja Condomínio informe o nome...">
-            <mat-error *ngIf="endereco.get('condominio')?.invalid">{{
-              getErrorMessage("condominio")
-              }}</mat-error>
-          </mat-form-field>
-
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Bairro:</mat-label>
-            <input [(ngModel)]="cliente.bairro" matInput type="text" formControlName="bairro" placeholder="Insira o bairro..." />
-            <mat-error *ngIf="endereco.get('bairro')?.invalid">{{
-              getErrorMessage("bairro")
-              }}</mat-error>
+            <input [(ngModel)]="cliente.endereco.bairro" matInput type="text" formControlName="bairro"
+              placeholder="Insira o bairro..." />
           </mat-form-field>
-
+          
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Município:</mat-label>
-            <input [(ngModel)]="cliente.municipio" matInput type="text" formControlName="municipio" placeholder="Insira o município..."
-              maxlength="60" />
-            <mat-error *ngIf="endereco.get('municipio')?.invalid">{{
-              getErrorMessage("municipio")
-              }}</mat-error>
+            <input [(ngModel)]="cliente.endereco.municipio" matInput type="text" formControlName="municipio"
+              placeholder="Insira o município..." maxlength="60" />
           </mat-form-field>
-
           <mat-form-field class="fullWidth" appearance="fill">
             <mat-label>Estado(UF):</mat-label>
             <mat-select formControlName="estado">
               <mat-option value="">Selecione os Estados</mat-option>
-              <mat-option [(ngModel)]="cliente.estado" *ngFor="let estado of estados" [value]="estado.nome">
+              <mat-option [(ngModel)]="cliente.endereco.estado" *ngFor="let estado of estados" [value]="estado.sigla">
                 {{ estado.nome }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-
-        -->
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Nome do Condomínio:</mat-label>
+            <input [(ngModel)]="cliente.endereco.condominio" matInput type="text" formControlName="condominio"
+              placeholder="Caso seja Condomínio informe o nome...">
+          </mat-form-field>
+          
+          
           <mat-card-actions>
             <button mat-button matStepperPrevious>Voltar</button>
             <button [disabled]="!abaEnderecos.valid" mat-button matStepperNext>Avançar</button>
           </mat-card-actions>
-        </form>
-      </mat-step>
-
-      <!-- OBSERVAÇÃO -->
-      <mat-step [stepControl]="abaObservacoes" [optional]="opcional">
-        <ng-template matStepLabel>Observações</ng-template>
-        <form [formGroup]="abaObservacoes">
-
-          <mat-form-field class="halfWidth" appearance="outline">
-            <mat-label>Observação ou Ponto de Referência:</mat-label>
-            <textarea  matInput formControlName="observacao"
-              placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc..." cdkTextareaAutosize
-              [cdkAutosizeMinRows]="3" [cdkAutosizeMinRows]="5" maxlength="300">
-        </textarea>
-          </mat-form-field>
-
-          <mat-card-actions>
-            <button mat-button matStepperPrevious>Voltar</button>
-            <!-- <button mat-button (click)="stepper.reset()">Limpar formulário</button> -->
-            <button mat-raised-button color="primary" (click)="create()">Cadastrar</button>
-          </mat-card-actions>
-        </form>
-      </mat-step>
+          </form>
+          </mat-step>
+          
+          <!-- OBSERVAÇÃO -->
+          <mat-step [stepControl]="abaObservacoes" [optional]="opcional">
+            <ng-template matStepLabel>Observações</ng-template>
+            <form [formGroup]="abaObservacoes">
+          
+              <mat-form-field class="halfWidth" appearance="outline">
+                <mat-label>Observação ou Ponto de Referência:</mat-label>
+                <textarea matInput formControlName="observacao"
+                  placeholder="Casa nos fundos, bater no portão, soltar fogos.. etc..." cdkTextareaAutosize
+                  [cdkAutosizeMinRows]="3" [cdkAutosizeMinRows]="5" maxlength="300">
+                  </textarea>
+              </mat-form-field>
+          
+              <mat-card-actions>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <!-- <button mat-button (click)="stepper.reset()">Limpar formulário</button> -->
+                <button mat-raised-button color="primary" (click)="create()">Cadastrar</button>
+              </mat-card-actions>
+            </form>
+          </mat-step>
 
     </mat-stepper>
 
